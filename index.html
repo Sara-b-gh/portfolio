@@ -1,188 +1,381 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio interactif de Sara Gherri, étudiante en Software Engineering, à la recherche d'un stage .">
+  <meta name="description" content="Portfolio interactif de Sara Gherri, étudiante en Software Engineering.">
   <title>Sara.exe — Portfolio interactif</title>
+
   <style>
     :root {
-      --bg:#101522; --panel:#192235; --panel2:#222e45;
-      --text:#f1f5ff; --muted:#a8b5ce; --accent:#8b7cff;
-      --green:#7df0bd; --line:#34425c;
+      --bg: #101522;
+      --panel: #192235;
+      --panel2: #222e45;
+      --text: #f1f5ff;
+      --muted: #a8b5ce;
+      --accent: #8b7cff;
+      --green: #7df0bd;
+      --line: #34425c;
     }
-    * { box-sizing:border-box; }
+
+    * { box-sizing: border-box; }
+
     body {
-      margin:0; min-height:100vh; font-family:Consolas,Monaco,monospace;
-      color:var(--text);
-      background:radial-gradient(circle at 20% 0,#26345b,transparent 35%),var(--bg);
-      transition:background .3s,color .3s;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Consolas, Monaco, monospace;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0, #26345b, transparent 35%),
+        var(--bg);
+      transition: background .3s, color .3s;
     }
-    button,input { font:inherit; }
-    button { cursor:pointer; }
-    .desktop { min-height:100vh; padding:28px; }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .desktop { min-height: 100vh; padding: 28px; }
+
     .topbar {
-      display:flex; justify-content:space-between; align-items:center; gap:12px;
-      padding:14px 18px; background:#111827dd; border:1px solid var(--line);
-      border-radius:14px; box-shadow:0 10px 35px #0004;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #111827dd;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 10px 35px #0004;
     }
-    .brand { font-weight:900; letter-spacing:.05em; }
-    .brand span,.welcome h1 span { color:var(--accent); }
-    .status { color:var(--green); font-size:12px; }
-    .welcome { max-width:850px; margin:55px auto 25px; text-align:center; }
+
+    .brand { font-weight: 900; letter-spacing: .05em; }
+    .brand span { color: var(--green); }
+    .status { color: var(--green); font-size: 12px; }
+
+    .welcome {
+      max-width: 850px;
+      margin: 55px auto 25px;
+      text-align: center;
+    }
+
     .pixel-label {
-      color:var(--green); font-size:12px; letter-spacing:.15em;
-      text-transform:uppercase;
+      color: var(--green);
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
     }
-    .welcome h1 { font-size:clamp(32px,6vw,66px); margin:18px 0; }
-    .welcome p { max-width:680px; margin:auto; color:var(--muted); line-height:1.8; }
-    .hint { margin-top:20px; color:var(--muted); font-size:12px; }
-    .stage-banner {
-      display:inline-block; margin-top:18px; padding:14px 20px;
-      border:1px solid var(--accent); border-radius:12px;
-      background:#8b7cff18; color:var(--text); font-size:13px; line-height:1.8;
+
+    .welcome h1 {
+      font-size: clamp(32px, 6vw, 66px);
+      margin: 18px 0;
     }
-    .stage-banner strong { color:var(--green); }
+
+    .welcome h1 span { color: var(--accent); }
+
+    .welcome p {
+      max-width: 680px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .hint {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Icônes du bureau */
     .desktop-icons {
-      display:grid; grid-template-columns:repeat(4,minmax(100px,140px));
-      justify-content:center; gap:16px; margin:35px auto 45px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(100px, 140px));
+      justify-content: center;
+      gap: 16px;
+      margin: 35px auto 45px;
     }
+
     .desk-icon {
-      min-height:115px; padding:18px 8px; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:10px; color:var(--text);
-      background:transparent; border:1px solid transparent; border-radius:14px;
-      transition:.2s;
+      min-height: 115px;
+      padding: 18px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      transition: .2s;
     }
-    .desk-icon:hover,.desk-icon:focus-visible {
-      background:#ffffff0d; border-color:var(--line); transform:translateY(-3px);
-      outline:none;
+
+    .desk-icon:hover,
+    .desk-icon:focus-visible {
+      background: #ffffff0d;
+      border-color: var(--line);
+      transform: translateY(-3px);
+      outline: none;
     }
-    .emoji { font-size:34px; filter:drop-shadow(0 5px 6px #0005); }
-    .desk-icon small { color:var(--muted); font-size:11px; }
+
+    .emoji {
+      font-size: 34px;
+      filter: drop-shadow(0 5px 6px #0005);
+    }
+
+    .desk-icon small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* Fenêtres */
     .window {
-      display:none; position:fixed; z-index:20; left:50%; top:50%;
-      transform:translate(-50%,-50%); width:min(760px,calc(100vw - 28px));
-      max-height:78vh; overflow:auto; background:var(--panel);
-      border:1px solid #596987; border-radius:15px; box-shadow:0 25px 90px #0009;
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(760px, calc(100vw - 28px));
+      max-height: 78vh;
+      overflow: auto;
+      background: var(--panel);
+      border: 1px solid #596987;
+      border-radius: 15px;
+      box-shadow: 0 25px 90px #0009;
     }
-    .window.open { display:block; animation:appear .18s ease-out; }
+
+    .window.open {
+      display: block;
+      animation: appear .18s ease-out;
+    }
+
     @keyframes appear {
-      from { opacity:0; transform:translate(-50%,-47%) scale(.98); }
-      to { opacity:1; transform:translate(-50%,-50%) scale(1); }
+      from {
+        opacity: 0;
+        transform: translate(-50%, -47%) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
+
     .titlebar {
-      position:sticky; top:0; display:flex; justify-content:space-between;
-      align-items:center; gap:12px; padding:12px 16px; background:var(--panel2);
-      border-bottom:1px solid var(--line); user-select:none;
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--panel2);
+      border-bottom: 1px solid var(--line);
+      user-select: none;
     }
-    .window-title { font-size:13px; font-weight:bold; }
+
+    .window-title { font-size: 13px; font-weight: bold; }
+
     .close {
-      width:27px; height:27px; color:#24131a; background:#ff6b7a;
-      border:0; border-radius:50%; font-weight:bold;
+      width: 27px;
+      height: 27px;
+      color: #24131a;
+      background: #ff6b7a;
+      border: none;
+      border-radius: 50%;
+      font-weight: bold;
     }
-    .window-body { padding:24px; }
-    .window-body h2 { margin-top:0; font-size:26px; }
-    .window-body p,.window-body li { color:var(--muted); line-height:1.8; }
-    .window-body a { color:var(--green); }
-    .project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+
+    .window-body { padding: 24px; }
+
+    .window-body h2 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .window-body p,
+    .window-body li {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .window-body a { color: var(--green); }
+
+    /* Cartes des projets */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
     .project {
-      padding:18px; background:#111a2b; border:1px solid var(--line);
-      border-radius:12px; transition:transform .2s,border-color .2s;
+      padding: 18px;
+      background: #111a2b;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      transition: transform .2s, border-color .2s;
     }
-    .project:hover { transform:translateY(-3px); border-color:var(--accent); }
-    .project h3 { margin:10px 0; }
-    .project p { font-size:13px; }
-    .tag { color:var(--green); font-size:11px; text-transform:uppercase; }
+
+    .project:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .project h3 { margin: 10px 0; }
+    .project p { font-size: 13px; }
+
+    .tag {
+      color: var(--green);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
     .action {
-      display:inline-block; margin-top:8px; padding:10px 13px; color:white!important;
-      background:var(--accent); border:0; border-radius:8px; text-decoration:none;
-      font-size:12px;
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 13px;
+      color: white !important;
+      background: var(--accent);
+      border: 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 12px;
     }
+
+    /* Barre de raccourcis */
     .taskbar {
-      position:sticky; bottom:12px; display:flex; justify-content:center;
-      flex-wrap:wrap; gap:10px; margin-top:30px;
+      position: sticky;
+      bottom: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
     }
+
     .taskbar button {
-      padding:10px 14px; color:var(--text); background:#111827ef;
-      border:1px solid var(--line); border-radius:10px;
+      padding: 10px 14px;
+      color: var(--text);
+      background: #111827ef;
+      border: 1px solid var(--line);
+      border-radius: 10px;
     }
-    .taskbar button:hover { border-color:var(--green); }
+
+    .taskbar button:hover { border-color: var(--green); }
+
+    /* Mini-jeu rétro */
+    .game-shell { background: #0b111c; border: 1px solid var(--line); border-radius: 12px; padding: 14px; color: #f1f5ff; }
+    .game-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .game-stats { display: flex; gap: 14px; color: var(--green); font-size: 12px; }
+    .game-board { display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: 3px; max-width: 480px; margin: auto; }
+    .game-cell { aspect-ratio: 1; display: grid; place-items: center; background: #121b2b; border-radius: 3px; font-size: clamp(8px, 2vw, 16px); }
+    .game-cell.wall { background: #344bc0; box-shadow: inset 0 0 0 1px #697cff; }
+    .game-cell.dot::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #fff1b8; }
+    .game-cell.player { color: #ffe45c; }
+    .game-cell.ghost { color: #ff718a; }
+    .game-cell.ghost.pink { color: #ff8de1; }
+    .game-cell.ghost.blue { color: #68e5ff; }
+    .game-cell.ghost.orange { color: #ffad5c; }
+    .game-cell.portal { background: #532a8b; box-shadow: inset 0 0 0 1px #d4a4ff; }
+    .game-controls { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .game-controls button { min-width: 42px; padding: 10px; color: var(--text); background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; }
+    .game-note { text-align: center; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    body.light .game-shell { background: #172033; }
+
+    /* Terminal */
     .terminal {
-      padding:16px; overflow-wrap:anywhere; color:var(--green);
-      background:#0b111c; border:1px solid var(--line); border-radius:10px;
-      line-height:1.9; max-height:350px; overflow:auto;
+      padding: 16px;
+      overflow-wrap: anywhere;
+      color: var(--green);
+      background: #0b111c;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      line-height: 1.9;
     }
+
     .terminal input {
-      width:min(65%,400px); color:white; background:transparent; border:0; outline:none;
+      width: 65%;
+      color: white;
+      background: transparent;
+      border: 0;
+      outline: none;
     }
-    .terminal-line { white-space:pre-wrap; overflow-wrap:anywhere; }
-    .terminal-prompt { color:var(--green); }
-    .footer { margin-top:22px; color:var(--muted); text-align:center; font-size:11px; }
-    .game-shell {
-      background:#0b111c; border:1px solid var(--line); border-radius:12px;
-      padding:14px; color:#f1f5ff;
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
     }
-    .game-head {
-      display:flex; justify-content:space-between; align-items:center;
-      flex-wrap:wrap; gap:10px; margin-bottom:14px;
-    }
-    .game-stats { display:flex; gap:14px; color:var(--green); font-size:12px; }
-    .game-board {
-      display:grid; grid-template-columns:repeat(15,minmax(0,1fr));
-      gap:3px; max-width:480px; margin:auto;
-    }
-    .game-cell {
-      aspect-ratio:1; display:grid; place-items:center; background:#121b2b;
-      border-radius:3px; font-size:clamp(8px,2vw,16px);
-    }
-    .game-cell.wall { background:#344bc0; box-shadow:inset 0 0 0 1px #697cff; }
-    .game-cell.dot::after {
-      content:""; width:4px; height:4px; border-radius:50%; background:#fff1b8;
-    }
-    .game-cell.player { color:#ffe45c; }
-    .game-cell.ghost { color:#ff718a; }
-    .game-controls { display:flex; justify-content:center; gap:8px; margin-top:14px; }
-    .game-controls button {
-      min-width:42px; padding:10px; color:var(--text); background:var(--panel2);
-      border:1px solid var(--line); border-radius:8px;
-    }
-    .game-note { text-align:center; color:var(--muted); font-size:12px; line-height:1.6; }
+
+    /* Thème clair */
     body.light {
-      --bg:#edf1fb; --panel:#fff; --panel2:#e2e8f7; --text:#172033;
-      --muted:#56647e; --line:#cbd4e6;
-      background:radial-gradient(circle at 20% 0,#d9d7ff,transparent 35%),var(--bg);
+      --bg: #edf1fb;
+      --panel: #ffffff;
+      --panel2: #e2e8f7;
+      --text: #172033;
+      --muted: #56647e;
+      --line: #cbd4e6;
+      background:
+        radial-gradient(circle at 20% 0, #d9d7ff, transparent 35%),
+        var(--bg);
     }
-    body.light .topbar,body.light .taskbar button { background:#ffffffdf; }
-    body.light .project { background:#f3f6fc; }
-    body.light .terminal,body.light .game-shell { background:#172033; color:#9bf4c9; }
+
+    body.light .topbar,
+    body.light .taskbar button {
+      background: #ffffffdf;
+    }
+
+    body.light .project { background: #f3f6fc; }
+
+    body.light .terminal {
+      color: #9bf4c9;
+      background: #172033;
+    }
+
     .theme {
-      position:fixed; right:20px; bottom:20px; z-index:30; padding:11px 15px;
-      color:var(--text); background:var(--panel); border:1px solid var(--line);
-      border-radius:999px;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      padding: 11px 15px;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 999px;
     }
-    button:focus-visible,a:focus-visible {
-      outline:2px solid var(--green); outline-offset:3px;
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
     }
-    [hidden] { display:none!important; }
-    @media(max-width:600px) {
-      .desktop { padding:12px; }
-      .welcome { margin-top:35px; }
-      .desktop-icons { grid-template-columns:repeat(2,minmax(100px,140px)); gap:8px; }
-      .project-grid { grid-template-columns:1fr; }
-      .window-body { padding:18px; }
-      .topbar { font-size:12px; }
-      .status { display:none; }
-      .theme { right:12px; bottom:12px; }
-      .game-head { justify-content:center; }
+
+    @media (max-width: 600px) {
+      .desktop { padding: 12px; }
+      .welcome { margin-top: 35px; }
+
+      .desktop-icons {
+        grid-template-columns: repeat(2, minmax(100px, 140px));
+        gap: 8px;
+      }
+
+      .project-grid { grid-template-columns: 1fr; }
+      .window-body { padding: 18px; }
+      .topbar { font-size: 12px; }
+      .status { display: none; }
+      .theme { right: 12px; bottom: 12px; }
     }
-    @media(prefers-reduced-motion:reduce) {
-      *,*::before,*::after {
-        animation-duration:.01ms!important; transition-duration:.01ms!important;
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="desktop">
     <header class="topbar">
@@ -200,23 +393,69 @@
           Explorez mon bureau, ouvrez les dossiers et découvrez
           mes projets comme dans un mini système d’exploitation.
         </p>
-        <div class="hint">CONSEIL : cliquez sur une icône pour ouvrir une fenêtre.</div>
-        <div class="stage-banner">
-          <strong>● DISPONIBLE</strong><br>
-          🔎 À LA RECHERCHE D’UN STAGE  — N’hésitez pas à me contacter !
+        <div class="hint">
+          CONSEIL : double-cliquez sur une icône pour ouvrir une fenêtre.
+        </div>
+        <div class="hint" style="display:inline-block;margin-top:18px;padding:12px 18px;border:1px solid var(--accent);border-radius:12px;background:#8b7cff18;color:var(--text);font-size:13px;line-height:1.7">
+          <span style="color:var(--green)">● DISPONIBLE</span><br>
+          🔎 À LA RECHERCHE D’UN STAGE — N’hésitez pas à me contacter !
         </div>
       </section>
 
       <section class="desktop-icons" aria-label="Bureau interactif">
-        <button class="desk-icon" data-open="about"><span class="emoji">🪪</span><span>À propos</span><small>about.txt</small></button>
-        <button class="desk-icon" data-open="projects"><span class="emoji">📁</span><span>Mes projets</span><small>projects/</small></button>
-        <button class="desk-icon" data-open="skills"><span class="emoji">🧰</span><span>Compétences</span><small>skills.exe</small></button>
-        <button class="desk-icon" data-open="experience"><span class="emoji">🗂️</span><span>Expérience</span><small>experience.log</small></button>
-        <button class="desk-icon" data-open="terminal"><span class="emoji">💻</span><span>Terminal</span><small>cmd.exe</small></button>
-        <button class="desk-icon" data-open="contact"><span class="emoji">✉️</span><span>Contact</span><small>contact.vcf</small></button>
-        <button class="desk-icon" data-open="cv"><span class="emoji">📄</span><span>Mon CV</span><small>cv.pdf</small></button>
-        <button class="desk-icon" data-open="game"><span class="emoji">🟡</span><span>Mini-jeu</span><small>sarah-man.exe</small></button>
-        <button class="desk-icon" data-open="secret"><span class="emoji">🎮</span><span>Secret</span><small>???</small></button>
+        <button class="desk-icon" data-open="about">
+          <span class="emoji">🪪</span>
+          <span>À propos</span>
+          <small>about.txt</small>
+        </button>
+
+        <button class="desk-icon" data-open="projects">
+          <span class="emoji">📁</span>
+          <span>Mes projets</span>
+          <small>projects/</small>
+        </button>
+
+        <button class="desk-icon" data-open="skills">
+          <span class="emoji">🧰</span>
+          <span>Compétences</span>
+          <small>skills.exe</small>
+        </button>
+
+        <button class="desk-icon" data-open="experience">
+          <span class="emoji">🗂️</span>
+          <span>Expérience</span>
+          <small>experience.log</small>
+        </button>
+
+        <button class="desk-icon" data-open="terminal">
+          <span class="emoji">💻</span>
+          <span>Terminal</span>
+          <small>cmd.exe</small>
+        </button>
+
+        <button class="desk-icon" data-open="contact">
+          <span class="emoji">✉️</span>
+          <span>Contact</span>
+          <small>contact.vcf</small>
+        </button>
+
+        <button class="desk-icon" data-open="cv">
+          <span class="emoji">📄</span>
+          <span>Mon CV</span>
+          <small>cv.pdf</small>
+        </button>
+
+        <button class="desk-icon" data-open="game">
+          <span class="emoji">🟡</span>
+          <span>Mini-jeu</span>
+          <small>sara-man.exe</small>
+        </button>
+
+        <button class="desk-icon" data-open="secret">
+          <span class="emoji">🎮</span>
+          <span>Secret</span>
+          <small>???</small>
+        </button>
       </section>
     </main>
 
@@ -224,109 +463,255 @@
       <button data-open="about">⌂ Accueil</button>
       <button data-open="projects">▣ Projets</button>
       <button data-open="terminal">&gt;_ Terminal</button>
-      <button data-open="game">🟡 Mini-jeu</button>
       <button data-open="contact">✉ Contact</button>
     </div>
-    <div class="footer">© 2026 Sarah Gherri · Fait avec curiosité, café et quelques bugs.</div>
+
+    <div class="footer">
+      © 2026 Sara Gherri · Fait avec curiosité, café et quelques bugs.
+    </div>
   </div>
 
-  <button class="theme" id="themeToggle" type="button">☼ Changer de thème</button>
+  <button class="theme" id="themeToggle" type="button">
+    ☼ Changer de thème
+  </button>
 
-  <section class="window" id="win-about" role="dialog" aria-modal="true" aria-labelledby="title-about">
-    <div class="titlebar"><span class="window-title" id="title-about">about.txt — Bloc-notes</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre À propos -->
+  <section class="window" id="win-about" role="dialog" aria-modal="true"
+    aria-labelledby="title-about">
+    <div class="titlebar">
+      <span class="window-title" id="title-about">about.txt — Bloc-notes</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
       <div class="pixel-label">01 / Profil</div>
       <h2>Un peu de moi 👋</h2>
-      <p>Je suis étudiante ingénieure en informatique à ESPRIT, passionnée par le développement logiciel, les interfaces et la résolution de problèmes. J’aime transformer une idée en application concrète et apprendre en construisant.</p>
-      <p>Curieuse, organisée et communicative, j’apprécie le travail en équipe et les projets qui mêlent logique, créativité et technologie.</p>
-      <p><strong>Mon objectif :</strong> continuer à progresser en Software Engineering et contribuer à des projets utiles.</p>
+      <p>
+        Je suis étudiante ingénieure en informatique à ESPRIT, passionnée
+        par le développement logiciel, les interfaces et la résolution
+        de problèmes. J’aime transformer une idée en application concrète
+        et apprendre en construisant.
+      </p>
+      <p>
+        Curieuse, organisée et communicative, j’apprécie le travail
+        en équipe et les projets qui mêlent logique, créativité et technologie.
+      </p>
+      <p>
+        <strong>Mon objectif :</strong> continuer à progresser en
+        Software Engineering et contribuer à des projets utiles.
+      </p>
     </div>
   </section>
 
-  <section class="window" id="win-projects" role="dialog" aria-modal="true" aria-labelledby="title-projects">
-    <div class="titlebar"><span class="window-title" id="title-projects">projects/ — Explorateur</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre Projets -->
+  <section class="window" id="win-projects" role="dialog" aria-modal="true"
+    aria-labelledby="title-projects">
+    <div class="titlebar">
+      <span class="window-title" id="title-projects">projects/ — Explorateur</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">02 / Réalisations</div><h2>Mes projets</h2>
+      <div class="pixel-label">02 / Réalisations</div>
+      <h2>Mes projets</h2>
+
       <div class="project-grid">
-        <article class="project"><div class="tag">Java · Spring Boot · MySQL</div><h3>🚗 AutoLoc</h3><p>Application de gestion de location de véhicules avec backend Spring Boot, JPA/Hibernate et modèle de données relationnel.</p><a class="action" href="https://github.com/Sara-b-gh/AutoLoc" target="_blank" rel="noopener noreferrer">Ouvrir sur GitHub ↗</a></article>
-        <article class="project"><div class="tag">JavaFX · MySQL</div><h3>🏥 VITA</h3><p>Système de gestion hospitalière avec interfaces JavaFX et données centralisées.</p><a class="action" href="https://github.com/Sara-b-gh/Vita" target="_blank" rel="noopener noreferrer">Ouvrir sur GitHub ↗</a></article>
-        <article class="project"><div class="tag">Embedded · IoT</div><h3>☀️ Routeur solaire</h3><p>Idée de projet de fin d’études autour d’un routeur solaire contrôlable à distance, avec interface web locale et application mobile.</p><span class="tag">Idée — pas encore en développement</span></article>
-        <article class="project"><div class="tag">Unity · 3D · XR</div><h3>🪐 Interactive 3D</h3><p>Expériences Unity autour de la 3D interactive, de la simulation et des applications XR.</p><span class="tag">Unity / C#</span></article>
+        <article class="project">
+          <div class="tag">Java · Spring Boot · MySQL</div>
+          <h3>🚗 AutoLoc</h3>
+          <p>
+            Application de gestion de location de véhicules avec backend
+            Spring Boot, JPA/Hibernate et modèle de données relationnel.
+          </p>
+          <a class="action" href="https://github.com/Sara-b-gh/AutoLoc"
+             target="_blank" rel="noopener noreferrer">
+            Ouvrir sur GitHub ↗
+          </a>
+        </article>
+
+        <article class="project">
+          <div class="tag">JavaFX · MySQL</div>
+          <h3>🏥 VITA</h3>
+          <p>
+            Système de gestion hospitalière avec interfaces JavaFX
+            et données centralisées.
+          </p>
+          <a class="action" href="https://github.com/Sara-b-gh/Vita"
+             target="_blank" rel="noopener noreferrer">
+            Ouvrir sur GitHub ↗
+          </a>
+        </article>
+
+        <article class="project">
+          <div class="tag">Embedded · IoT</div>
+          <h3>☀️ Routeur solaire</h3>
+          <p>
+            Projet de fin d’études développé autour d’un routeur solaire
+            contrôlable à distance, avec interface web locale
+            et application mobile.
+          </p>
+          <span class="tag">Projet développé</span>
+        </article>
+
+        <article class="project">
+          <div class="tag">Unity · 3D · XR</div>
+          <h3>🪐 Interactive 3D</h3>
+          <p>
+            Expériences Unity autour de la 3D interactive,
+            de la simulation et des applications XR.
+          </p>
+          <span class="tag">Unity / C#</span>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="window" id="win-skills" role="dialog" aria-modal="true" aria-labelledby="title-skills">
-    <div class="titlebar"><span class="window-title" id="title-skills">skills.exe — Inventaire</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre Compétences -->
+  <section class="window" id="win-skills" role="dialog" aria-modal="true"
+    aria-labelledby="title-skills">
+    <div class="titlebar">
+      <span class="window-title" id="title-skills">skills.exe — Inventaire</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">03 / Toolkit</div><h2>Mon inventaire technique</h2>
+      <div class="pixel-label">03 / Toolkit</div>
+      <h2>Mon inventaire technique</h2>
       <p>⌨️ <strong>Programmation :</strong> C, C#, Python, Java, JavaScript</p>
-      <p>🌐 <strong>Web :</strong> HTML, CSS, Angular</p><p>🗄️ <strong>Données :</strong> MySQL, Oracle XE</p>
-      <p>🎮 <strong>Création :</strong> Unity, 3D, XR</p><p>🔌 <strong>Systèmes :</strong> systèmes embarqués, IoT</p>
-      <p>🌐 <strong>Réseaux et outils :</strong> TCP/IP, Linux/Unix, Packet Tracer, IntelliJ IDEA, Visual Studio</p>
+      <p>🌐 <strong>Web :</strong> HTML, CSS, Angular</p>
+      <p>🗄️ <strong>Données :</strong> MySQL, Oracle XE</p>
+      <p>🎮 <strong>Création :</strong> Unity, 3D, XR</p>
+      <p>🔌 <strong>Systèmes :</strong> systèmes embarqués, IoT</p>
+      <p>
+        🌐 <strong>Réseaux et outils :</strong> TCP/IP, Linux/Unix,
+        Packet Tracer, IntelliJ IDEA, Visual Studio
+      </p>
     </div>
   </section>
 
-  <section class="window" id="win-experience" role="dialog" aria-modal="true" aria-labelledby="title-experience">
-    <div class="titlebar"><span class="window-title" id="title-experience">experience.log — Journal</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre Expérience -->
+  <section class="window" id="win-experience" role="dialog" aria-modal="true"
+    aria-labelledby="title-experience">
+    <div class="titlebar">
+      <span class="window-title" id="title-experience">experience.log — Journal</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">04 / Parcours</div><h2>Expérience professionnelle</h2>
-      <article class="project"><div class="tag">Juillet – septembre 2026</div><h3>Tunisie Telecom — Stage d’observation</h3><p>Découverte des opérations télécoms et participation au traitement des demandes : activation et désactivation de lignes, changement de localisation, problèmes de connexion, équipements et suivi des interventions.</p></article>
-      <p>Mon parcours académique et mes projets m’aident à relier développement logiciel, systèmes et expérience utilisateur.</p>
+      <div class="pixel-label">04 / Parcours</div>
+      <h2>Expérience professionnelle</h2>
+      <article class="project">
+        <div class="tag">Juillet – septembre 2026</div>
+        <h3>Tunisie Telecom — Stage d’observation</h3>
+        <p>
+          Découverte des opérations télécoms et participation au traitement
+          des demandes : activation et désactivation de lignes, changement
+          de localisation, problèmes de connexion, équipements et suivi
+          des interventions.
+        </p>
+      </article>
+      <p>
+        Mon parcours académique et mes projets m’aident à relier
+        développement logiciel, systèmes et expérience utilisateur.
+      </p>
     </div>
   </section>
 
-  <section class="window" id="win-terminal" role="dialog" aria-modal="true" aria-labelledby="title-terminal">
-    <div class="titlebar"><span class="window-title" id="title-terminal">cmd.exe — Terminal Sarah</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre Terminal -->
+  <section class="window" id="win-terminal" role="dialog" aria-modal="true"
+    aria-labelledby="title-terminal">
+    <div class="titlebar">
+      <span class="window-title" id="title-terminal">cmd.exe — Terminal Sara</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
       <div class="terminal" id="terminalOutput" aria-live="polite">
-        <div class="terminal-line">SARAH OS [Version 1.0.26]</div>
-        <div class="terminal-line">Bienvenue ! Tape help pour voir les commandes.</div>
-        <div class="terminal-prompt"><label for="commandInput">visitor@portfolio:~$ </label><input id="commandInput" autocomplete="off" placeholder="help puis Entrée"></div>
+        SARA OS [Version 1.0.26]<br>
+        Bienvenue ! Tapez <strong>help</strong> pour voir les commandes.<br>
+        <label for="commandInput">visitor@portfolio:~$ </label>
+        <input id="commandInput" autocomplete="off"
+          placeholder="help puis Entrée">
       </div>
     </div>
   </section>
 
-  <section class="window" id="win-contact" role="dialog" aria-modal="true" aria-labelledby="title-contact">
-    <div class="titlebar"><span class="window-title" id="title-contact">contact.vcf — Carte de visite</span><button class="close" aria-label="Fermer">×</button></div>
+  <!-- Fenêtre Contact -->
+  <section class="window" id="win-contact" role="dialog" aria-modal="true"
+    aria-labelledby="title-contact">
+    <div class="titlebar">
+      <span class="window-title" id="title-contact">contact.vcf — Carte de visite</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">05 / Connexion</div><h2>On se parle ? ✉️</h2>
+      <div class="pixel-label">05 / Connexion</div>
+      <h2>On se parle ? ✉️</h2>
       <p><strong>🔎 Je suis à la recherche d’un stage !</strong> Je serais ravie d’échanger avec vous au sujet d’une opportunité.</p>
-      <p>Une opportunité de stage, un projet ou simplement envie d’échanger ? Mon terminal est ouvert.</p>
+      <p>
+        Une opportunité de stage, un projet ou simplement envie d’échanger ?
+        Mon terminal est ouvert.
+      </p>
       <p>📧 <a href="mailto:gherrisarah@gmail.com">gherrisarah@gmail.com</a></p>
-      <p>🐙 <a href="https://github.com/Sara-b-gh" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-      <p>🌐 <a href="https://saragherri.netlify.app/" target="_blank" rel="noopener noreferrer">Portfolio en ligne</a></p>
     </div>
   </section>
 
-  <section class="window" id="win-cv" role="dialog" aria-modal="true" aria-labelledby="title-cv">
-    <div class="titlebar"><span class="window-title" id="title-cv">cv.pdf — Aperçu</span><button class="close" aria-label="Fermer">×</button></div>
-    <div class="window-body"><div class="pixel-label">Fichier local</div><h2>Mon CV</h2><p>Ajoutez votre CV au dépôt sous le nom <strong>cv.pdf</strong> pour activer le téléchargement.</p><a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">Ouvrir cv.pdf ↗</a></div>
+  <!-- Fenêtre CV -->
+  <section class="window" id="win-cv" role="dialog" aria-modal="true"
+    aria-labelledby="title-cv">
+    <div class="titlebar">
+      <span class="window-title" id="title-cv">cv.pdf — Aperçu</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">Fichier local</div>
+      <h2>Mon CV</h2>
+      <p>
+        Ajoutez votre CV au dépôt sous le nom <strong>cv.pdf</strong>
+        pour activer le téléchargement.
+      </p>
+      <a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">
+        Ouvrir cv.pdf ↗
+      </a>
+    </div>
   </section>
 
+  <!-- Fenêtre secrète -->
   <section class="window" id="win-game" role="dialog" aria-modal="true" aria-labelledby="title-game">
-    <div class="titlebar"><span class="window-title" id="title-game">sarah-man.exe — Mini-jeu</span><button class="close" aria-label="Fermer">×</button></div>
+    <div class="titlebar">
+      <span class="window-title" id="title-game">sara-man.exe — Mini-jeu</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">Bonus / Arcade</div><h2>🟡 Sarah-Man</h2>
-      <p>Ramasse les points du labyrinthe, évite le fantôme et essaie de battre ton score !</p>
+      <div class="pixel-label">Bonus / Arcade</div>
+      <h2>🟡 Sara-Man</h2>
+      <p>Ramasse les points, évite les quatre fantômes et utilise les portails violets pour te téléporter !</p>
       <div class="game-shell">
-        <div class="game-head"><strong>PLAYER 1</strong><div class="game-stats"><span>Score : <b id="gameScore">0</b></span><span>Vies : <b id="gameLives">3</b></span></div><button class="action" id="gameStart" type="button">Jouer / Recommencer</button></div>
-        <div id="gameBoard" class="game-board" role="grid" aria-label="Labyrinthe Sarah-Man"></div>
-        <p id="gameMessage" class="game-note" aria-live="polite">Clique sur Jouer, puis utilise les flèches du clavier ou les boutons.</p>
-        <div class="game-controls"><button type="button" data-move="up" aria-label="Haut">↑</button><button type="button" data-move="left" aria-label="Gauche">←</button><button type="button" data-move="down" aria-label="Bas">↓</button><button type="button" data-move="right" aria-label="Droite">→</button></div>
+        <div class="game-head">
+          <strong>PLAYER 1</strong>
+          <div class="game-stats"><span>Score : <b id="gameScore">0</b></span><span>Vies : <b id="gameLives">3</b></span></div>
+          <button class="action" id="gameStart" type="button">Jouer / Recommencer</button>
+        </div>
+        <div id="gameBoard" class="game-board" role="grid" aria-label="Labyrinthe Sara-Man"></div>
+        <p id="gameMessage" class="game-note" aria-live="polite">Clique sur Jouer, puis utilise les flèches du clavier ou les boutons. Les portails violets te téléportent d’un côté à l’autre du labyrinthe.</p>
+        <div class="game-controls">
+          <button type="button" data-move="up" aria-label="Haut">↑</button>
+          <button type="button" data-move="left" aria-label="Gauche">←</button>
+          <button type="button" data-move="down" aria-label="Bas">↓</button>
+          <button type="button" data-move="right" aria-label="Droite">→</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="window" id="win-secret" role="dialog" aria-modal="true" aria-labelledby="title-secret">
-    <div class="titlebar"><span class="window-title" id="title-secret">secret.txt — Fichier caché</span><button class="close" aria-label="Fermer">×</button></div>
+  <section class="window" id="win-secret" role="dialog" aria-modal="true"
+    aria-labelledby="title-secret">
+    <div class="titlebar">
+      <span class="window-title" id="title-secret">secret.txt — Fichier caché</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
     <div class="window-body">
-      <div class="pixel-label">Achievement unlocked</div><h2>🎉 Vous avez trouvé le secret !</h2>
-      <p>Dans le développement comme dans un jeu, chaque bug est une énigme et chaque solution débloque le niveau suivant.</p>
+      <div class="pixel-label">Achievement unlocked</div>
+      <h2>🎉 Vous avez trouvé le secret !</h2>
+      <p>
+        Dans le développement comme dans un jeu, chaque bug est une énigme
+        et chaque solution débloque le niveau suivant.
+      </p>
       <p>Merci d’avoir exploré mon portfolio. +100 XP pour votre curiosité.</p>
-      <hr style="border-color:var(--line);margin:20px 0">
-      <div class="tag">En préparation</div><h3>🚀 Projet surprise</h3>
-      <p>Un nouveau projet est en préparation. Plus de détails bientôt !</p>
     </div>
   </section>
 
@@ -336,185 +721,270 @@
     function openWindow(name) {
       const win = document.getElementById("win-" + name);
       if (!win) return;
+
       windows.forEach(item => {
         item.classList.remove("open");
         item.style.left = "";
         item.style.top = "";
         item.style.transform = "";
       });
+
       win.classList.add("open");
-      if (name === "terminal") setTimeout(() => document.getElementById("commandInput").focus(), 50);
+
+      if (name === "terminal") {
+        setTimeout(() => document.getElementById("commandInput").focus(), 50);
+      }
     }
 
+    // Ouvrir les icônes au clic ou double-clic
     document.querySelectorAll(".desk-icon").forEach(button => {
       button.addEventListener("click", () => openWindow(button.dataset.open));
+      button.addEventListener("dblclick", () => openWindow(button.dataset.open));
     });
+
+    // Raccourcis de la barre du bas
     document.querySelectorAll(".taskbar [data-open]").forEach(button => {
       button.addEventListener("click", () => openWindow(button.dataset.open));
     });
+
+    // Fermer les fenêtres
     document.querySelectorAll(".close").forEach(button => {
-      button.addEventListener("click", () => button.closest(".window").classList.remove("open"));
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") windows.forEach(win => win.classList.remove("open"));
+      button.addEventListener("click", () => {
+        button.closest(".window").classList.remove("open");
+      });
     });
 
-    // Fenêtres déplaçables
+    // Fermer avec Échap
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        windows.forEach(win => win.classList.remove("open"));
+      }
+    });
+
+    // Déplacer les fenêtres avec leur barre de titre
     document.querySelectorAll(".titlebar").forEach(bar => {
-      let startX=0,startY=0,baseX=0,baseY=0,dragging=false;
+      let startX = 0, startY = 0, baseX = 0, baseY = 0;
+      let dragging = false;
+
       bar.addEventListener("pointerdown", event => {
         if (event.target.closest("button")) return;
-        const win=bar.closest(".window");
-        dragging=true; startX=event.clientX; startY=event.clientY;
-        const rect=win.getBoundingClientRect();
-        win.style.transform="none"; win.style.left=rect.left+"px"; win.style.top=rect.top+"px";
-        baseX=rect.left; baseY=rect.top;
+
+        const win = bar.closest(".window");
+        dragging = true;
+        startX = event.clientX;
+        startY = event.clientY;
+
+        const rect = win.getBoundingClientRect();
+        win.style.transform = "none";
+        win.style.left = rect.left + "px";
+        win.style.top = rect.top + "px";
+        baseX = rect.left;
+        baseY = rect.top;
+
         bar.setPointerCapture(event.pointerId);
       });
+
       bar.addEventListener("pointermove", event => {
         if (!dragging) return;
-        const win=bar.closest(".window");
-        win.style.left=Math.max(0,Math.min(innerWidth-win.offsetWidth,baseX+event.clientX-startX))+"px";
-        win.style.top=Math.max(0,Math.min(innerHeight-80,baseY+event.clientY-startY))+"px";
+
+        const win = bar.closest(".window");
+        const x = baseX + event.clientX - startX;
+        const y = baseY + event.clientY - startY;
+
+        win.style.left =
+          Math.max(0, Math.min(innerWidth - win.offsetWidth, x)) + "px";
+        win.style.top =
+          Math.max(0, Math.min(innerHeight - 80, y)) + "px";
       });
-      bar.addEventListener("pointerup",()=>dragging=false);
-      bar.addEventListener("pointercancel",()=>dragging=false);
+
+      bar.addEventListener("pointerup", () => dragging = false);
+      bar.addEventListener("pointercancel", () => dragging = false);
     });
 
     // Horloge
-    const clock=document.getElementById("clock");
-    function updateClock(){clock.textContent=new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});}
-    updateClock(); setInterval(updateClock,1000);
+    const clock = document.getElementById("clock");
 
-    // Mode clair / sombre
-    const themeButton=document.getElementById("themeToggle");
-    try { if(localStorage.getItem("portfolio-theme")==="light") document.body.classList.add("light"); } catch(error){}
-    themeButton.addEventListener("click",()=>{
+    function updateClock() {
+      clock.textContent = new Date().toLocaleTimeString("fr-FR", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Thème clair/sombre avec mémorisation
+    const themeButton = document.getElementById("themeToggle");
+
+    try {
+      if (localStorage.getItem("portfolio-theme") === "light") {
+        document.body.classList.add("light");
+      }
+    } catch (error) {}
+
+    themeButton.addEventListener("click", () => {
       document.body.classList.toggle("light");
-      try { localStorage.setItem("portfolio-theme",document.body.classList.contains("light")?"light":"dark"); } catch(error){}
+
+      try {
+        localStorage.setItem(
+          "portfolio-theme",
+          document.body.classList.contains("light") ? "light" : "dark"
+        );
+      } catch (error) {}
     });
 
-    // Terminal : l'input reste toujours présent
-    const input=document.getElementById("commandInput");
-    const output=document.getElementById("terminalOutput");
-    const commands={
-      help:"Commandes : help, about, projects, skills, contact, pfe, secret, clear",
-      about:"Sarah Gherri — étudiante en Software Engineering à ESPRIT.",
-      projects:"Projets : AutoLoc, VITA, idée de routeur solaire, Interactive 3D.",
-      pfe:"Le routeur solaire est une idée de PFE ; le projet n’est pas encore en développement.",
-      skills:"Java, C, C#, Python, Angular, HTML, CSS, JavaScript, MySQL, Unity, IoT.",
-      contact:"Email : gherrisarah@gmail.com | GitHub : Sara-b-gh",
-      secret:"Curiosité +100 XP ! Le projet surprise est en préparation."
+    // Terminal interactif
+    const input = document.getElementById("commandInput");
+    const output = document.getElementById("terminalOutput");
+
+    const commands = {
+      help: "Commandes : help, about, projects, skills, contact, pfe, secret, clear",
+      about: "Sara Gherri — étudiante en Software Engineering à ESPRIT.",
+      projects: "Projets : AutoLoc, VITA, routeur solaire développé, Interactive 3D.",
+      pfe: "Le projet de routeur solaire avec contrôle à distance, interface web locale et application mobile est développé.",
+      skills: "Java, C, C#, Python, Angular, HTML, CSS, JavaScript, MySQL, Unity, IoT.",
+      contact: "Email : gherrisarah@gmail.com",
+      secret: "Achievement unlocked : Curiosité +100 XP !"
     };
 
-    function printTerminalLine(text){
-      const line=document.createElement("div");
-      line.className="terminal-line";
-      line.textContent=text;
-      output.insertBefore(line,input.closest(".terminal-prompt"));
+    function printTerminalLine(text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      output.insertBefore(line, input);
     }
 
-    input.addEventListener("keydown",event=>{
-      if(event.key!=="Enter") return;
+    input.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
       event.preventDefault();
-      const command=input.value.trim().toLowerCase();
-      if(!command) return;
-      printTerminalLine("visitor@portfolio:~$ "+command);
-      if(command==="clear"){
-        [...output.querySelectorAll(".terminal-line")].slice(2).forEach(line=>line.remove());
+      const command = input.value.trim().toLowerCase();
+      if (!command) return;
+      printTerminalLine("visitor@portfolio:~$ " + command.replace(/[&<>"]/g, ""));
+      if (command === "clear") {
+        [...output.children].forEach(child => {
+          if (child.id !== "commandInput" && !child.contains(input)) child.remove();
+        });
       } else {
-        printTerminalLine(commands[command]||"Commande inconnue. Tapez help.");
+        printTerminalLine(commands[command] || "Commande inconnue. Tapez help.");
       }
-      input.value="";
-      output.scrollTop=output.scrollHeight;
+      input.value = "";
+      output.scrollTop = output.scrollHeight;
     });
 
-    // Mini-jeu Sarah-Man, inspiré des jeux d'arcade
-    const gameBoard=document.getElementById("gameBoard");
-    const gameScore=document.getElementById("gameScore");
-    const gameLives=document.getElementById("gameLives");
-    const gameMessage=document.getElementById("gameMessage");
-    const gameStart=document.getElementById("gameStart");
-    const mazeTemplate=[
-      "###############","#.............#","#.###.###.###.#",
-      "#.............#","###.#.###.#.###","#...#.....#...#",
-      "#.###.#.#.###.#","#.....#.#.....#","#.###.#.#.###.#",
-      "#...#.....#...#","###.#.###.#.###","#.............#",
-      "#.###.###.###.#","#.............#","###############"
+    // Mini-jeu Sara-Man
+    const gameBoard = document.getElementById("gameBoard");
+    const gameScore = document.getElementById("gameScore");
+    const gameLives = document.getElementById("gameLives");
+    const gameMessage = document.getElementById("gameMessage");
+    const gameStart = document.getElementById("gameStart");
+    const mazeTemplate = [
+      "###############", "#.............#", "#.###.###.###.#",
+      "#.............#", "###.#.###.#.###", "#...#.....#...#",
+      "#.###.#.#.###.#", "#.....#.#.....#", "#.###.#.#.###.#",
+      "#...#.....#...#", "###.#.###.#.###", "#.............#",
+      "#.###.###.###.#", "#.............#", "###############"
     ];
-    let maze=[],player={x:1,y:1},ghost={x:13,y:13};
-    let score=0,lives=3,gameRunning=false,gameTimer=null;
+    let maze = [], player = {x:1,y:1};
+    const ghostStarts = [
+      {x:13,y:13,emoji:"👻",color:""},
+      {x:13,y:1,emoji:"👻",color:"pink"},
+      {x:1,y:13,emoji:"👻",color:"blue"},
+      {x:7,y:11,emoji:"👻",color:"orange"}
+    ];
+    let ghosts = [];
+    const portals = [{x:1,y:7,to:{x:13,y:7}},{x:13,y:7,to:{x:1,y:7}}];
+    let score = 0, lives = 3, gameRunning = false, gameTimer = null;
 
-    function drawGame(){
+    function drawGame() {
       gameBoard.replaceChildren();
-      maze.forEach((row,y)=>row.forEach((cell,x)=>{
-        const tile=document.createElement("div");
-        tile.className="game-cell"+(cell==="#"?" wall":cell==="."?" dot":"");
-        tile.setAttribute("role","gridcell");
-        if(player.x===x&&player.y===y){tile.classList.add("player");tile.textContent="😺";}
-        else if(ghost.x===x&&ghost.y===y){tile.classList.add("ghost");tile.textContent="👻";}
+      maze.forEach((row, y) => row.forEach((cell, x) => {
+        const tile = document.createElement("div");
+        const portal = portals.find(p => p.x === x && p.y === y);
+        const ghostHere = ghosts.find(g => g.x === x && g.y === y);
+        tile.className = "game-cell" + (cell === "#" ? " wall" : cell === "." ? " dot" : "") + (portal ? " portal" : "");
+        tile.setAttribute("role", "gridcell");
+        if (player.x === x && player.y === y) {
+          tile.classList.add("player"); tile.textContent = "😺";
+        } else if (ghostHere) {
+          tile.classList.add("ghost");
+          if (ghostHere.color) tile.classList.add(ghostHere.color);
+          tile.textContent = ghostHere.emoji;
+        } else if (portal) {
+          tile.textContent = "🌀";
+        }
         gameBoard.appendChild(tile);
       }));
-      gameScore.textContent=score; gameLives.textContent=lives;
+      gameScore.textContent = score;
+      gameLives.textContent = lives;
     }
 
-    function endGame(message){
-      gameRunning=false; clearInterval(gameTimer);
-      gameMessage.textContent=message; drawGame();
+    function endGame(message) {
+      gameRunning = false; clearInterval(gameTimer);
+      gameMessage.textContent = message; drawGame();
     }
 
-    function startGame(){
+    function startGame() {
       clearInterval(gameTimer);
-      maze=mazeTemplate.map(row=>row.split(""));
-      player={x:1,y:1}; ghost={x:13,y:13};
-      score=0; lives=3; gameRunning=true;
-      gameMessage.textContent="À toi de jouer ! Mange tous les points.";
-      drawGame(); gameTimer=setInterval(moveGhost,700);
+      maze = mazeTemplate.map(row => row.split(""));
+      player = {x:1,y:1};
+      ghosts = ghostStarts.map(g => ({...g}));
+      score = 0; lives = 3; gameRunning = true;
+      gameMessage.textContent = "À toi de jouer ! Mange tous les points.";
+      drawGame();
+      gameTimer = setInterval(moveGhost, 700);
     }
 
-    function movePlayer(dx,dy){
-      if(!gameRunning) return;
-      const nx=player.x+dx,ny=player.y+dy;
-      if(!maze[ny]||maze[ny][nx]==="#"||maze[ny][nx]===undefined) return;
-      player={x:nx,y:ny};
-      if(maze[ny][nx]==="."){maze[ny][nx]=" ";score+=10;}
-      if(player.x===ghost.x&&player.y===ghost.y){
-        lives--; player={x:1,y:1};
-        if(lives<=0){endGame("Partie terminée ! Recommence pour rejouer.");return;}
+    function movePlayer(dx, dy) {
+      if (!gameRunning) return;
+      let nx = player.x + dx, ny = player.y + dy;
+      if (!maze[ny] || maze[ny][nx] === "#" || maze[ny][nx] === undefined) return;
+      const portal = portals.find(p => p.x === nx && p.y === ny);
+      if (portal) { nx = portal.to.x; ny = portal.to.y; }
+      player = {x:nx,y:ny};
+      if (maze[ny][nx] === ".") { maze[ny][nx] = " "; score += 10; }
+      if (ghosts.some(g => player.x === g.x && player.y === g.y)) {
+        lives--; player = {x:1,y:1};
+        if (lives <= 0) { endGame("Partie terminée ! Recommence pour rejouer."); return; }
       }
-      if(!maze.some(row=>row.includes("."))){
-        score+=100; endGame("Bravo ! Labyrinthe terminé 🎉 Score : "+score);return;
+      if (!maze.some(row => row.includes("."))) {
+        score += 100; endGame("Bravo ! Labyrinthe terminé 🎉 Score : " + score); return;
       }
       drawGame();
     }
 
-    function moveGhost(){
-      if(!gameRunning) return;
-      const options=[[0,-1],[0,1],[-1,0],[1,0]].filter(([dx,dy])=>
-        maze[ghost.y+dy]&&maze[ghost.y+dy][ghost.x+dx]&&maze[ghost.y+dy][ghost.x+dx]!=="#"
-      );
-      if(options.length){
-        const [dx,dy]=options[Math.floor(Math.random()*options.length)];
-        ghost={x:ghost.x+dx,y:ghost.y+dy};
-      }
-      if(player.x===ghost.x&&player.y===ghost.y){
-        lives--; player={x:1,y:1};
-        if(lives<=0){endGame("Le fantôme t’a attrapée ! Recommence pour rejouer.");return;}
+    function moveGhost() {
+      if (!gameRunning) return;
+      ghosts.forEach(ghost => {
+        const options = [[0,-1],[0,1],[-1,0],[1,0]].filter(([dx,dy]) =>
+          maze[ghost.y + dy] && maze[ghost.y + dy][ghost.x + dx] &&
+          maze[ghost.y + dy][ghost.x + dx] !== "#"
+        );
+        if (options.length) {
+          const [dx,dy] = options[Math.floor(Math.random() * options.length)];
+          let nx = ghost.x + dx, ny = ghost.y + dy;
+          const portal = portals.find(p => p.x === nx && p.y === ny);
+          if (portal) { nx = portal.to.x; ny = portal.to.y; }
+          ghost.x = nx; ghost.y = ny;
+        }
+      });
+      if (ghosts.some(g => player.x === g.x && player.y === g.y)) {
+        lives--; player = {x:1,y:1};
+        if (lives <= 0) { endGame("Le fantôme t’a attrapée ! Recommence pour rejouer."); return; }
       }
       drawGame();
     }
 
-    gameStart.addEventListener("click",startGame);
-    document.querySelectorAll("[data-move]").forEach(button=>{
-      button.addEventListener("click",()=>{
-        const moves={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
-        const [dx,dy]=moves[button.dataset.move]; movePlayer(dx,dy);
+    gameStart.addEventListener("click", startGame);
+    document.querySelectorAll("[data-move]").forEach(button => {
+      button.addEventListener("click", () => {
+        const moves = {up:[0,-1], down:[0,1], left:[-1,0], right:[1,0]};
+        const [dx,dy] = moves[button.dataset.move]; movePlayer(dx,dy);
       });
     });
-    document.addEventListener("keydown",event=>{
-      if(!gameRunning||!document.getElementById("win-game").classList.contains("open")) return;
-      const moves={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
-      if(moves[event.key]){event.preventDefault();movePlayer(...moves[event.key]);}
+    document.addEventListener("keydown", event => {
+      if (!gameRunning || !document.getElementById("win-game").classList.contains("open")) return;
+      const moves = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]};
+      if (moves[event.key]) { event.preventDefault(); movePlayer(...moves[event.key]); }
     });
     drawGame();
   </script>
