@@ -1,28 +1,45 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio de Sarah Gherri, étudiante ingénieure en Software Engineering à ESPRIT.">
-  <title>Sarah Gherri — Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de Sara Gherri, étudiante en Software Engineering.">
+  <title>Sara Gherri — Portfolio</title>
+
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: light-dark(#f7f8fc, #0b1020);
-      --surface: light-dark(#fff, #111827);
-      --text: light-dark(#111827, #f3f4f6);
-      --muted: light-dark(#667085, #aab3c5);
+      color-scheme: light;
+      --bg: #f7f8fc;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #667085;
       --accent: #6c5ce7;
-      --line: light-dark(#e7e9f0, #263044);
+      --line: #e7e9f0;
     }
-    * { box-sizing: border-box; }
+
+    body.dark {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --surface: #111827;
+      --text: #f3f4f6;
+      --muted: #aab3c5;
+      --line: #263044;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Inter, system-ui, sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
+      transition: background 0.3s, color 0.3s;
     }
+
     nav {
       position: sticky;
       top: 0;
@@ -33,37 +50,123 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
-    .logo { font-weight: 800; font-size: 20px; }
-    .logo span, h1 span { color: var(--accent); }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .logo span,
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
     nav a {
       color: var(--muted);
       text-decoration: none;
-      margin-left: 18px;
       font-size: 14px;
     }
-    main { max-width: 1120px; margin: auto; padding: 0 24px; }
-    .hero { min-height: 76vh; display: grid; place-items: center; }
-    .hero-inner { max-width: 900px; }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Bouton animé clair/sombre */
+    .theme-toggle {
+      width: 58px;
+      height: 32px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .knob {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: grid;
+      place-items: center;
+      transition: transform 0.35s ease;
+    }
+
+    .theme-toggle[aria-pressed="true"] .knob {
+      transform: translateX(25px);
+    }
+
+    .theme-toggle svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+    }
+
     .eyebrow {
       color: var(--accent);
       font-weight: 700;
-      letter-spacing: .12em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 13px;
     }
-    h1 {
-      font-size: clamp(42px, 8vw, 86px);
+
+    .hero h1 {
+      font-size: clamp(45px, 8vw, 85px);
       line-height: 1;
       margin: 18px 0;
     }
+
     .hero p {
-      font-size: 19px;
-      line-height: 1.7;
       color: var(--muted);
+      font-size: 20px;
+      line-height: 1.7;
       max-width: 720px;
     }
-    .buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
     .btn {
       display: inline-block;
       padding: 13px 19px;
@@ -72,67 +175,184 @@
       font-weight: 700;
       border: 1px solid var(--line);
       color: var(--text);
+      transition: transform 0.2s;
     }
-    .primary { background: var(--accent); color: white; border-color: var(--accent); }
-    section { padding: 70px 0; border-top: 1px solid var(--line); }
-    h2 { font-size: 34px; margin: 0 0 25px; }
-    .about { display: grid; grid-template-columns: 1fr 1.5fr; gap: 45px; }
-    .about p, .card p, .contact p { color: var(--muted); line-height: 1.8; }
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill {
-      padding: 10px 13px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 10px;
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+    .primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    section {
+      padding: 75px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: 36px;
+      margin: 12px 0 30px;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 45px;
+    }
+
+    .about p,
+    .card p,
+    .contact p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
     .card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 24px;
-      transition: .2s;
+      padding: 25px;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
     .tag {
       color: var(--accent);
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
     }
-    .card h3 { margin: 10px 0; font-size: 22px; }
-    .links a { color: var(--text); font-weight: 700; text-decoration: none; }
-    .contact { display: flex; justify-content: space-between; align-items: center; gap: 25px; }
-    footer { padding: 30px 0; color: var(--muted); font-size: 13px; }
+
+    .card h3 {
+      font-size: 23px;
+      margin: 12px 0;
+    }
+
+    .links a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 10px 13px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
     @media (max-width: 700px) {
-      nav a { display: none; }
-      .about, .grid { grid-template-columns: 1fr; }
-      .contact { display: block; }
+      nav {
+        padding: 15px 5%;
+      }
+
+      nav .nav-links {
+        gap: 10px;
+      }
+
+      nav .nav-links a {
+        display: none;
+      }
+
+      .about,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
+
+      .contact {
+        display: block;
+      }
     }
   </style>
 </head>
+
 <body>
   <nav>
     <div class="logo">Sarah<span>.</span></div>
-    <div>
+
+    <div class="nav-links">
       <a href="#about">À propos</a>
       <a href="#experience">Expérience</a>
       <a href="#projects">Projets</a>
       <a href="#skills">Compétences</a>
       <a href="#contact">Contact</a>
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Activer le mode sombre"
+        aria-pressed="false"
+        title="Changer de thème"
+      >
+        <span class="knob" id="themeIcon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+          </svg>
+        </span>
+      </button>
     </div>
   </nav>
 
   <main>
+    <!-- Accueil -->
     <div class="hero">
       <div class="hero-inner">
-        <div class="eyebrow">Étudiante ingénieure · Software Engineering</div>
+        <div class="eyebrow">
+          Étudiante en informatique · Software Engineering
+        </div>
+
         <h1>Je construis des projets <span>utiles.</span></h1>
+
         <p>
           Étudiante ingénieure en informatique à ESPRIT,
-          motivée par le développement logiciel et la création
-          d'applications concrètes.
+          actuellement en cycle ingénieur en Software Engineering.
         </p>
+
         <div class="buttons">
           <a class="btn primary" href="#projects">Voir mes projets</a>
           <a class="btn" href="cv.pdf" target="_blank">Télécharger mon CV</a>
@@ -140,127 +360,115 @@
       </div>
     </div>
 
+    <!-- À propos -->
     <section id="about">
       <div class="about">
         <div>
           <div class="eyebrow">01 — À propos</div>
           <h2>Qui suis-je ?</h2>
         </div>
+
         <div>
           <p>
             Étudiante ingénieure en Software Engineering à ESPRIT,
             je suis motivée, sérieuse et passionnée par le développement
-            logiciel. J'ai réalisé VITA, un système de gestion hospitalière
+            logiciel. J’ai réalisé VITA, un système de gestion hospitalière
             développé en Java et JavaFX avec une interface conçue avec
             SceneBuilder.
           </p>
+
           <p>
-            Organisée et communicative, j'apprécie le travail en équipe.
-            Je développe mes compétences à travers des projets pratiques
-            et l'apprentissage de nouvelles technologies.
+            Organisée et communicative, j’apprécie le travail en équipe.
+            Mes compétences comprennent Java, C#, Python, Angular, HTML,
+            CSS, JavaScript, MySQL, Unity, les systèmes embarqués et l’IoT.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- Expérience -->
     <section id="experience">
       <div class="eyebrow">02 — Expérience professionnelle</div>
-      <h2>Mes stages</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="tag">Tunisie Telecom</div>
-          <h3>Stagiaire — Équipe technique</h3>
-          <p><strong>Juillet – septembre 2026</strong></p>
-          <p>
-            Participation aux opérations de création, activation et
-            désactivation de lignes, changement de localisation et
-            résolution de problèmes de connexion.
-          </p>
-        </div>
-        <div class="card">
-          <div class="tag">L&B Solar Company</div>
-          <h3>Projet de fin d'études</h3>
-          <p><strong>Février – mai 2025</strong></p>
-          <p>
-            Conception et implémentation d'un routeur solaire à commande
-            à distance, avec une interface web locale et une application
-            mobile. Découverte des systèmes embarqués, de l'IoT et des
-            énergies renouvelables.
-          </p>
-        </div>
-        <div class="card">
-          <div class="tag">MARETAP</div>
-          <h3>Stagiaire</h3>
-          <p><strong>Janvier – février 2024</strong></p>
-          <p>
-            Découverte des activités techniques et assistance à
-            l'inspection et au test d'équipements électriques.
-          </p>
-        </div>
-        <div class="card">
-          <div class="tag">STEG</div>
-          <h3>Stagiaire</h3>
-          <p><strong>Janvier – février 2023</strong></p>
-          <p>
-            Découverte du milieu professionnel et préparation de
-            documentation technique.
-          </p>
-        </div>
+      <h2>Mon stage</h2>
+
+      <div class="card">
+        <div class="tag">Tunisie Telecom · Stage d’observation</div>
+        <h3>Stagiaire — Tunisie Telecom</h3>
+        <p><strong>Juillet – septembre 2026</strong></p>
+
+        <p>
+          Découverte des opérations télécoms et participation aux activités
+          de traitement des demandes : création, activation et désactivation
+          de lignes, changement de localisation et résolution de problèmes
+          de connexion. Familiarisation avec les équipements et le suivi
+          des interventions, notamment autour des modems.
+        </p>
       </div>
     </section>
 
+    <!-- Projets -->
     <section id="projects">
       <div class="eyebrow">03 — Projets</div>
       <h2>Quelques réalisations</h2>
+
       <div class="grid">
         <div class="card">
           <div class="tag">Java · Spring Boot · MySQL</div>
           <h3>AutoLoc</h3>
           <p>
-            Application de gestion de location de véhicules utilisant
-            Spring Boot, JPA/Hibernate et MySQL.
+            Application de gestion de location de véhicules avec backend
+            Spring Boot, JPA/Hibernate, entités métier et associations.
           </p>
           <div class="links">
-            <a href="https://github.com/Sara-b-gh/AutoLoc" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://github.com/Sara-b-gh/AutoLoc"
+               target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
+
         <div class="card">
           <div class="tag">JavaFX · MySQL</div>
           <h3>VITA</h3>
           <p>
-            Système de gestion hospitalière avec interface JavaFX,
-            SceneBuilder et base de données MySQL.
+            Système de gestion hospitalière avec interfaces JavaFX,
+            gestion des rôles et données centralisées.
           </p>
           <div class="links">
-            <a href="https://github.com/Sara-b-gh/Vita" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://github.com/Sara-b-gh/Vita"
+               target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
+
         <div class="card">
-          <div class="tag">IoT · Systèmes embarqués</div>
-          <h3>Routeur solaire connecté</h3>
+          <div class="tag">Embedded · Smart City</div>
+          <h3>Smart City</h3>
           <p>
-            Projet de fin d'études intégrant un routeur solaire contrôlable
-            à distance, une interface web locale et une application mobile.
+            Projet de fin d’études : conception d’un routeur solaire
+            à commande à distance, avec interface web locale
+            et application mobile.
           </p>
         </div>
+
         <div class="card">
           <div class="tag">Unity · 3D · XR</div>
           <h3>Interactive 3D</h3>
           <p>
-            Projets Unity autour de la 3D interactive, notamment la
-            simulation du système solaire et des applications XR.
+            Projets Unity autour de la 3D interactive, notamment
+            la simulation du système solaire et des applications XR.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- Compétences -->
     <section id="skills">
       <div class="eyebrow">04 — Compétences</div>
-      <h2>Compétences techniques</h2>
+      <h2>Mes compétences techniques</h2>
+
       <div class="skills">
-        <div class="skill">Java</div>
+        <div class="skill">C</div>
         <div class="skill">C#</div>
         <div class="skill">Python</div>
+        <div class="skill">Java</div>
         <div class="skill">Angular</div>
         <div class="skill">HTML</div>
         <div class="skill">CSS</div>
@@ -273,29 +481,86 @@
         <div class="skill">Linux/Unix</div>
         <div class="skill">Oracle XE</div>
         <div class="skill">Packet Tracer</div>
-        <div class="skill">Git / GitHub</div>
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact">
       <div class="contact">
         <div>
           <div class="eyebrow">05 — Contact</div>
           <h2>Travaillons ensemble.</h2>
+
           <p>
-            Je souhaite continuer à progresser en Software Engineering
-            et participer à des projets concrets et innovants.
+            Je recherche des opportunités de stage en Software Engineering
+            et des projets qui me permettent de progresser et de créer
+            des solutions concrètes.
           </p>
         </div>
+
         <div class="buttons">
-          <a class="btn primary" href="mailto:gherrisarah@gmail.com">Me contacter par e-mail</a>
-          <a class="btn" href="https://github.com/Sara-b-gh" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://linkedin.com/in/sara-gherri-34968b315" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn primary" href="mailto:gherrisarah@gmail.com">
+            Me contacter
+          </a>
+
+          <a class="btn"
+             href="https://github.com/Sara-b-gh"
+             target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
         </div>
       </div>
     </section>
 
-    <footer>© 2026 Sarah Gherri · Portfolio</footer>
+    <footer>
+      © 2026 Sara Gherri · Portfolio
+    </footer>
   </main>
+
+  <script>
+    const button = document.getElementById("themeToggle");
+    const icon = document.getElementById("themeIcon");
+
+    const sunIcon = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+      </svg>`;
+
+    const moonIcon = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"></path>
+      </svg>`;
+
+    function setTheme(isDark) {
+      document.body.classList.toggle("dark", isDark);
+      button.setAttribute("aria-pressed", String(isDark));
+      button.setAttribute(
+        "aria-label",
+        isDark ? "Activer le mode clair" : "Activer le mode sombre"
+      );
+      icon.innerHTML = isDark ? moonIcon : sunIcon;
+
+      try {
+        localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+      } catch (error) {
+        // Le thème reste utilisable même si le stockage est indisponible.
+      }
+    }
+
+    let savedTheme = "light";
+
+    try {
+      savedTheme = localStorage.getItem("portfolio-theme") || "light";
+    } catch (error) {
+      // Le thème clair est utilisé par défaut.
+    }
+
+    setTheme(savedTheme === "dark");
+
+    button.addEventListener("click", () => {
+      setTheme(!document.body.classList.contains("dark"));
+    });
+  </script>
 </body>
 </html>
