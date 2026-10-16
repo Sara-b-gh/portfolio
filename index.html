@@ -4,563 +4,833 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Sara Gherri, étudiante en Software Engineering.">
-  <title>Sara Gherri — Portfolio</title>
+  <meta name="description" content="Portfolio interactif de Sara Gherri, étudiante en Software Engineering.">
+  <title>Sara.exe — Portfolio interactif</title>
 
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f7f8fc;
-      --surface: #ffffff;
-      --text: #111827;
-      --muted: #667085;
-      --accent: #6c5ce7;
-      --line: #e7e9f0;
+      --bg: #101522;
+      --panel: #192235;
+      --panel2: #222e45;
+      --text: #f1f5ff;
+      --muted: #a8b5ce;
+      --accent: #8b7cff;
+      --green: #7df0bd;
+      --line: #34425c;
     }
 
-    body.dark {
-      color-scheme: dark;
-      --bg: #0b1020;
-      --surface: #111827;
-      --text: #f3f4f6;
-      --muted: #aab3c5;
-      --line: #263044;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
+      min-height: 100vh;
+      font-family: Consolas, Monaco, monospace;
       color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      background:
+        radial-gradient(circle at 20% 0, #26345b, transparent 35%),
+        var(--bg);
+      transition: background .3s, color .3s;
     }
 
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-      padding: 18px 7%;
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .desktop { min-height: 100vh; padding: 28px; }
+
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .logo span,
-    .hero h1 span {
-      color: var(--accent);
-    }
-
-    nav .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    /* Bouton animé clair/sombre */
-    .theme-toggle {
-      width: 58px;
-      height: 32px;
-      padding: 3px;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #111827dd;
       border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      flex-shrink: 0;
+      border-radius: 14px;
+      box-shadow: 0 10px 35px #0004;
     }
 
-    .knob {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: white;
-      display: grid;
-      place-items: center;
-      transition: transform 0.35s ease;
+    .brand { font-weight: 900; letter-spacing: .05em; }
+    .brand span { color: var(--green); }
+    .status { color: var(--green); font-size: 12px; }
+
+    .welcome {
+      max-width: 850px;
+      margin: 55px auto 25px;
+      text-align: center;
     }
 
-    .theme-toggle[aria-pressed="true"] .knob {
-      transform: translateX(25px);
-    }
-
-    .theme-toggle svg {
-      width: 15px;
-      height: 15px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .theme-toggle:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    main {
-      max-width: 1120px;
-      margin: auto;
-      padding: 0 24px;
-    }
-
-    .hero {
-      min-height: 78vh;
-      display: grid;
-      align-items: center;
-    }
-
-    .hero-inner {
-      max-width: 900px;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.12em;
+    .pixel-label {
+      color: var(--green);
+      font-size: 12px;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      font-size: 13px;
     }
 
-    .hero h1 {
-      font-size: clamp(45px, 8vw, 85px);
-      line-height: 1;
+    .welcome h1 {
+      font-size: clamp(32px, 6vw, 66px);
       margin: 18px 0;
     }
 
-    .hero p {
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.7;
-      max-width: 720px;
-    }
+    .welcome h1 span { color: var(--accent); }
 
-    .buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 19px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      border: 1px solid var(--line);
-      color: var(--text);
-      transition: transform 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .primary {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    section {
-      padding: 75px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    h2 {
-      font-size: 36px;
-      margin: 12px 0 30px;
-    }
-
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 45px;
-    }
-
-    .about p,
-    .card p,
-    .contact p {
+    .welcome p {
+      max-width: 680px;
+      margin: auto;
       color: var(--muted);
       line-height: 1.8;
     }
 
-    .grid {
+    .hint {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Icônes du bureau */
+    .desktop-icons {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(100px, 140px));
+      justify-content: center;
+      gap: 16px;
+      margin: 35px auto 45px;
+    }
+
+    .desk-icon {
+      min-height: 115px;
+      padding: 18px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      transition: .2s;
+    }
+
+    .desk-icon:hover,
+    .desk-icon:focus-visible {
+      background: #ffffff0d;
+      border-color: var(--line);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .emoji {
+      font-size: 34px;
+      filter: drop-shadow(0 5px 6px #0005);
+    }
+
+    .desk-icon small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* Fenêtres */
+    .window {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(760px, calc(100vw - 28px));
+      max-height: 78vh;
+      overflow: auto;
+      background: var(--panel);
+      border: 1px solid #596987;
+      border-radius: 15px;
+      box-shadow: 0 25px 90px #0009;
+    }
+
+    .window.open {
+      display: block;
+      animation: appear .18s ease-out;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -47%) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .titlebar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--panel2);
+      border-bottom: 1px solid var(--line);
+      user-select: none;
+    }
+
+    .window-title { font-size: 13px; font-weight: bold; }
+
+    .close {
+      width: 27px;
+      height: 27px;
+      color: #24131a;
+      background: #ff6b7a;
+      border: none;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .window-body { padding: 24px; }
+
+    .window-body h2 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .window-body p,
+    .window-body li {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .window-body a { color: var(--green); }
+
+    /* Cartes des projets */
+    .project-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 14px;
     }
 
-    .card {
-      background: var(--surface);
+    .project {
+      padding: 18px;
+      background: #111a2b;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 25px;
-      transition: transform 0.2s, border-color 0.2s;
+      border-radius: 12px;
+      transition: transform .2s, border-color .2s;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
+    .project:hover {
+      transform: translateY(-3px);
       border-color: var(--accent);
     }
 
+    .project h3 { margin: 10px 0; }
+    .project p { font-size: 13px; }
+
     .tag {
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 800;
+      color: var(--green);
+      font-size: 11px;
       text-transform: uppercase;
     }
 
-    .card h3 {
-      font-size: 23px;
-      margin: 12px 0;
-    }
-
-    .links a {
-      color: var(--text);
-      font-weight: 700;
+    .action {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 13px;
+      color: white !important;
+      background: var(--accent);
+      border: 0;
+      border-radius: 8px;
       text-decoration: none;
-      margin-right: 15px;
+      font-size: 12px;
     }
 
-    .links a:hover {
-      color: var(--accent);
-    }
-
-    .skills {
+    /* Barre de raccourcis */
+    .taskbar {
+      position: sticky;
+      bottom: 12px;
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      margin-top: 30px;
     }
 
-    .skill {
-      padding: 10px 13px;
-      background: var(--surface);
+    .taskbar button {
+      padding: 10px 14px;
+      color: var(--text);
+      background: #111827ef;
       border: 1px solid var(--line);
       border-radius: 10px;
     }
 
-    .contact {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 30px;
+    .taskbar button:hover { border-color: var(--green); }
+
+    /* Terminal */
+    .terminal {
+      padding: 16px;
+      overflow-wrap: anywhere;
+      color: var(--green);
+      background: #0b111c;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      line-height: 1.9;
     }
 
-    footer {
-      padding: 35px 0;
+    .terminal input {
+      width: 65%;
+      color: white;
+      background: transparent;
+      border: 0;
+      outline: none;
+    }
+
+    .footer {
+      margin-top: 22px;
       color: var(--muted);
-      font-size: 13px;
-      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 11px;
     }
 
-    @media (max-width: 700px) {
-      nav {
-        padding: 15px 5%;
+    /* Thème clair */
+    body.light {
+      --bg: #edf1fb;
+      --panel: #ffffff;
+      --panel2: #e2e8f7;
+      --text: #172033;
+      --muted: #56647e;
+      --line: #cbd4e6;
+      background:
+        radial-gradient(circle at 20% 0, #d9d7ff, transparent 35%),
+        var(--bg);
+    }
+
+    body.light .topbar,
+    body.light .taskbar button {
+      background: #ffffffdf;
+    }
+
+    body.light .project { background: #f3f6fc; }
+
+    body.light .terminal {
+      color: #9bf4c9;
+      background: #172033;
+    }
+
+    .theme {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      padding: 11px 15px;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      .desktop { padding: 12px; }
+      .welcome { margin-top: 35px; }
+
+      .desktop-icons {
+        grid-template-columns: repeat(2, minmax(100px, 140px));
+        gap: 8px;
       }
 
-      nav .nav-links {
-        gap: 10px;
-      }
+      .project-grid { grid-template-columns: 1fr; }
+      .window-body { padding: 18px; }
+      .topbar { font-size: 12px; }
+      .status { display: none; }
+      .theme { right: 12px; bottom: 12px; }
+    }
 
-      nav .nav-links a {
-        display: none;
-      }
-
-      .about,
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: 70vh;
-      }
-
-      .contact {
-        display: block;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <nav>
-    <div class="logo">Sarah<span>.</span></div>
+  <div class="desktop">
+    <header class="topbar">
+      <div class="brand">SARA<span>.EXE</span></div>
+      <div class="status">● SYSTEM ONLINE</div>
+      <div id="clock">00:00</div>
+    </header>
 
-    <div class="nav-links">
-      <a href="#about">À propos</a>
-      <a href="#experience">Expérience</a>
-      <a href="#projects">Projets</a>
-      <a href="#skills">Compétences</a>
-      <a href="#contact">Contact</a>
-
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Activer le mode sombre"
-        aria-pressed="false"
-        title="Changer de thème"
-      >
-        <span class="knob" id="themeIcon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
-          </svg>
-        </span>
-      </button>
-    </div>
-  </nav>
-
-  <main>
-    <!-- Accueil -->
-    <div class="hero">
-      <div class="hero-inner">
-        <div class="eyebrow">
-          Étudiante en informatique · Software Engineering
-        </div>
-
-        <h1>Je construis des projets <span>utiles.</span></h1>
-
+    <main>
+      <section class="welcome">
+        <div class="pixel-label">Bienvenue dans mon univers numérique</div>
+        <h1>Bonjour, je suis <span>Sara Gherri</span></h1>
         <p>
-          Étudiante ingénieure en informatique à ESPRIT,
-          actuellement en cycle ingénieur en Software Engineering.
+          Étudiante ingénieure en Software Engineering à ESPRIT.
+          Explorez mon bureau, ouvrez les dossiers et découvrez
+          mes projets comme dans un mini système d’exploitation.
         </p>
-
-        <div class="buttons">
-          <a class="btn primary" href="#projects">Voir mes projets</a>
-          <a class="btn" href="cv.pdf" target="_blank">Télécharger mon CV</a>
+        <div class="hint">
+          CONSEIL : double-cliquez sur une icône pour ouvrir une fenêtre.
         </div>
-      </div>
+      </section>
+
+      <section class="desktop-icons" aria-label="Bureau interactif">
+        <button class="desk-icon" data-open="about">
+          <span class="emoji">🪪</span>
+          <span>À propos</span>
+          <small>about.txt</small>
+        </button>
+
+        <button class="desk-icon" data-open="projects">
+          <span class="emoji">📁</span>
+          <span>Mes projets</span>
+          <small>projects/</small>
+        </button>
+
+        <button class="desk-icon" data-open="skills">
+          <span class="emoji">🧰</span>
+          <span>Compétences</span>
+          <small>skills.exe</small>
+        </button>
+
+        <button class="desk-icon" data-open="experience">
+          <span class="emoji">🗂️</span>
+          <span>Expérience</span>
+          <small>experience.log</small>
+        </button>
+
+        <button class="desk-icon" data-open="terminal">
+          <span class="emoji">💻</span>
+          <span>Terminal</span>
+          <small>cmd.exe</small>
+        </button>
+
+        <button class="desk-icon" data-open="contact">
+          <span class="emoji">✉️</span>
+          <span>Contact</span>
+          <small>contact.vcf</small>
+        </button>
+
+        <button class="desk-icon" data-open="cv">
+          <span class="emoji">📄</span>
+          <span>Mon CV</span>
+          <small>cv.pdf</small>
+        </button>
+
+        <button class="desk-icon" data-open="secret">
+          <span class="emoji">🎮</span>
+          <span>Secret</span>
+          <small>???</small>
+        </button>
+      </section>
+    </main>
+
+    <div class="taskbar">
+      <button data-open="about">⌂ Accueil</button>
+      <button data-open="projects">▣ Projets</button>
+      <button data-open="terminal">&gt;_ Terminal</button>
+      <button data-open="contact">✉ Contact</button>
     </div>
 
-    <!-- À propos -->
-    <section id="about">
-      <div class="about">
-        <div>
-          <div class="eyebrow">01 — À propos</div>
-          <h2>Qui suis-je ?</h2>
-        </div>
+    <div class="footer">
+      © 2026 Sarah Gherri · Fait avec curiosité, café et quelques bugs.
+    </div>
+  </div>
 
-        <div>
-          <p>
-            Étudiante ingénieure en Software Engineering à ESPRIT,
-            je suis motivée, sérieuse et passionnée par le développement
-            logiciel. J’ai réalisé VITA, un système de gestion hospitalière
-            développé en Java et JavaFX avec une interface conçue avec
-            SceneBuilder.
-          </p>
+  <button class="theme" id="themeToggle" type="button">
+    ☼ Changer de thème
+  </button>
 
-          <p>
-            Organisée et communicative, j’apprécie le travail en équipe.
-            Mes compétences comprennent Java, C#, Python, Angular, HTML,
-            CSS, JavaScript, MySQL, Unity, les systèmes embarqués et l’IoT.
-          </p>
-        </div>
-      </div>
-    </section>
+  <!-- Fenêtre À propos -->
+  <section class="window" id="win-about" role="dialog" aria-modal="true"
+    aria-labelledby="title-about">
+    <div class="titlebar">
+      <span class="window-title" id="title-about">about.txt — Bloc-notes</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">01 / Profil</div>
+      <h2>Un peu de moi 👋</h2>
+      <p>
+        Je suis étudiante ingénieure en informatique à ESPRIT, passionnée
+        par le développement logiciel, les interfaces et la résolution
+        de problèmes. J’aime transformer une idée en application concrète
+        et apprendre en construisant.
+      </p>
+      <p>
+        Curieuse, organisée et communicative, j’apprécie le travail
+        en équipe et les projets qui mêlent logique, créativité et technologie.
+      </p>
+      <p>
+        <strong>Mon objectif :</strong> continuer à progresser en
+        Software Engineering et contribuer à des projets utiles.
+      </p>
+    </div>
+  </section>
 
-    <!-- Expérience -->
-    <section id="experience">
-      <div class="eyebrow">02 — Expérience professionnelle</div>
-      <h2>Mon stage</h2>
+  <!-- Fenêtre Projets -->
+  <section class="window" id="win-projects" role="dialog" aria-modal="true"
+    aria-labelledby="title-projects">
+    <div class="titlebar">
+      <span class="window-title" id="title-projects">projects/ — Explorateur</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">02 / Réalisations</div>
+      <h2>Mes projets</h2>
 
-      <div class="card">
-        <div class="tag">Tunisie Telecom · Stage d’observation</div>
-        <h3>Stagiaire — Tunisie Telecom</h3>
-        <p><strong>Juillet – septembre 2026</strong></p>
-
-        <p>
-          Découverte des opérations télécoms et participation aux activités
-          de traitement des demandes : création, activation et désactivation
-          de lignes, changement de localisation et résolution de problèmes
-          de connexion. Familiarisation avec les équipements et le suivi
-          des interventions, notamment autour des modems.
-        </p>
-      </div>
-    </section>
-
-    <!-- Projets -->
-    <section id="projects">
-      <div class="eyebrow">03 — Projets</div>
-      <h2>Quelques réalisations</h2>
-
-      <div class="grid">
-        <div class="card">
+      <div class="project-grid">
+        <article class="project">
           <div class="tag">Java · Spring Boot · MySQL</div>
-          <h3>AutoLoc</h3>
+          <h3>🚗 AutoLoc</h3>
           <p>
             Application de gestion de location de véhicules avec backend
-            Spring Boot, JPA/Hibernate, entités métier et associations.
+            Spring Boot, JPA/Hibernate et modèle de données relationnel.
           </p>
-          <div class="links">
-            <a href="https://github.com/Sara-b-gh/AutoLoc"
-               target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
-        </div>
+          <a class="action" href="https://github.com/Sara-b-gh/AutoLoc"
+             target="_blank" rel="noopener noreferrer">
+            Ouvrir sur GitHub ↗
+          </a>
+        </article>
 
-        <div class="card">
+        <article class="project">
           <div class="tag">JavaFX · MySQL</div>
-          <h3>VITA</h3>
+          <h3>🏥 VITA</h3>
           <p>
-            Système de gestion hospitalière avec interfaces JavaFX,
-            gestion des rôles et données centralisées.
+            Système de gestion hospitalière avec interfaces JavaFX
+            et données centralisées.
           </p>
-          <div class="links">
-            <a href="https://github.com/Sara-b-gh/Vita"
-               target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
-        </div>
+          <a class="action" href="https://github.com/Sara-b-gh/Vita"
+             target="_blank" rel="noopener noreferrer">
+            Ouvrir sur GitHub ↗
+          </a>
+        </article>
 
-        <div class="card">
-          <div class="tag">Embedded · Smart City</div>
-          <h3>Smart City</h3>
+        <article class="project">
+          <div class="tag">Embedded · IoT</div>
+          <h3>☀️ Routeur solaire</h3>
           <p>
-            Projet de fin d’études : conception d’un routeur solaire
-            à commande à distance, avec interface web locale
+            Projet de fin d’études autour d’un routeur solaire
+            contrôlable à distance, avec interface web locale
             et application mobile.
           </p>
-        </div>
+          <span class="tag">Projet en développement</span>
+        </article>
 
-        <div class="card">
+        <article class="project">
           <div class="tag">Unity · 3D · XR</div>
-          <h3>Interactive 3D</h3>
+          <h3>🪐 Interactive 3D</h3>
           <p>
-            Projets Unity autour de la 3D interactive, notamment
-            la simulation du système solaire et des applications XR.
+            Expériences Unity autour de la 3D interactive,
+            de la simulation et des applications XR.
           </p>
-        </div>
+          <span class="tag">Unity / C#</span>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Compétences -->
-    <section id="skills">
-      <div class="eyebrow">04 — Compétences</div>
-      <h2>Mes compétences techniques</h2>
+  <!-- Fenêtre Compétences -->
+  <section class="window" id="win-skills" role="dialog" aria-modal="true"
+    aria-labelledby="title-skills">
+    <div class="titlebar">
+      <span class="window-title" id="title-skills">skills.exe — Inventaire</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">03 / Toolkit</div>
+      <h2>Mon inventaire technique</h2>
+      <p>⌨️ <strong>Programmation :</strong> C, C#, Python, Java, JavaScript</p>
+      <p>🌐 <strong>Web :</strong> HTML, CSS, Angular</p>
+      <p>🗄️ <strong>Données :</strong> MySQL, Oracle XE</p>
+      <p>🎮 <strong>Création :</strong> Unity, 3D, XR</p>
+      <p>🔌 <strong>Systèmes :</strong> systèmes embarqués, IoT</p>
+      <p>
+        🌐 <strong>Réseaux et outils :</strong> TCP/IP, Linux/Unix,
+        Packet Tracer, IntelliJ IDEA, Visual Studio
+      </p>
+    </div>
+  </section>
 
-      <div class="skills">
-        <div class="skill">C</div>
-        <div class="skill">C#</div>
-        <div class="skill">Python</div>
-        <div class="skill">Java</div>
-        <div class="skill">Angular</div>
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">MySQL</div>
-        <div class="skill">Unity</div>
-        <div class="skill">Systèmes embarqués</div>
-        <div class="skill">IoT</div>
-        <div class="skill">Réseaux TCP/IP</div>
-        <div class="skill">Linux/Unix</div>
-        <div class="skill">Oracle XE</div>
-        <div class="skill">Packet Tracer</div>
+  <!-- Fenêtre Expérience -->
+  <section class="window" id="win-experience" role="dialog" aria-modal="true"
+    aria-labelledby="title-experience">
+    <div class="titlebar">
+      <span class="window-title" id="title-experience">experience.log — Journal</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">04 / Parcours</div>
+      <h2>Expérience professionnelle</h2>
+      <article class="project">
+        <div class="tag">Juillet – septembre 2026</div>
+        <h3>Tunisie Telecom — Stage d’observation</h3>
+        <p>
+          Découverte des opérations télécoms et participation au traitement
+          des demandes : activation et désactivation de lignes, changement
+          de localisation, problèmes de connexion, équipements et suivi
+          des interventions.
+        </p>
+      </article>
+      <p>
+        Mon parcours académique et mes projets m’aident à relier
+        développement logiciel, systèmes et expérience utilisateur.
+      </p>
+    </div>
+  </section>
+
+  <!-- Fenêtre Terminal -->
+  <section class="window" id="win-terminal" role="dialog" aria-modal="true"
+    aria-labelledby="title-terminal">
+    <div class="titlebar">
+      <span class="window-title" id="title-terminal">cmd.exe — Terminal Sarah</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="terminal" id="terminalOutput" aria-live="polite">
+        SARAH OS [Version 1.0.26]<br>
+        Bienvenue ! Tapez <strong>help</strong> pour voir les commandes.<br>
+        <label for="commandInput">visitor@portfolio:~$ </label>
+        <input id="commandInput" autocomplete="off"
+          placeholder="help puis Entrée">
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <div class="contact">
-        <div>
-          <div class="eyebrow">05 — Contact</div>
-          <h2>Travaillons ensemble.</h2>
+  <!-- Fenêtre Contact -->
+  <section class="window" id="win-contact" role="dialog" aria-modal="true"
+    aria-labelledby="title-contact">
+    <div class="titlebar">
+      <span class="window-title" id="title-contact">contact.vcf — Carte de visite</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">05 / Connexion</div>
+      <h2>On se parle ? ✉️</h2>
+      <p>
+        Une opportunité de stage, un projet ou simplement envie d’échanger ?
+        Mon terminal est ouvert.
+      </p>
+      <p>📧 <a href="mailto:gherrisarah@gmail.com">gherrisarah@gmail.com</a></p>
+      <p>
+        🐙 <a href="https://github.com/Sara-b-gh"
+          target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
+      <p>
+        🌐 <a href="https://saragherri.netlify.app/"
+          target="_blank" rel="noopener noreferrer">Portfolio en ligne</a>
+      </p>
+    </div>
+  </section>
 
-          <p>
-            Je recherche des opportunités de stage en Software Engineering
-            et des projets qui me permettent de progresser et de créer
-            des solutions concrètes.
-          </p>
-        </div>
+  <!-- Fenêtre CV -->
+  <section class="window" id="win-cv" role="dialog" aria-modal="true"
+    aria-labelledby="title-cv">
+    <div class="titlebar">
+      <span class="window-title" id="title-cv">cv.pdf — Aperçu</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">Fichier local</div>
+      <h2>Mon CV</h2>
+      <p>
+        Ajoutez votre CV au dépôt sous le nom <strong>cv.pdf</strong>
+        pour activer le téléchargement.
+      </p>
+      <a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">
+        Ouvrir cv.pdf ↗
+      </a>
+    </div>
+  </section>
 
-        <div class="buttons">
-          <a class="btn primary" href="mailto:gherrisarah@gmail.com">
-            Me contacter
-          </a>
-
-          <a class="btn"
-             href="https://github.com/Sara-b-gh"
-             target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      © 2026 Sara Gherri · Portfolio
-    </footer>
-  </main>
+  <!-- Fenêtre secrète -->
+  <section class="window" id="win-secret" role="dialog" aria-modal="true"
+    aria-labelledby="title-secret">
+    <div class="titlebar">
+      <span class="window-title" id="title-secret">secret.txt — Fichier caché</span>
+      <button class="close" aria-label="Fermer">×</button>
+    </div>
+    <div class="window-body">
+      <div class="pixel-label">Achievement unlocked</div>
+      <h2>🎉 Vous avez trouvé le secret !</h2>
+      <p>
+        Dans le développement comme dans un jeu, chaque bug est une énigme
+        et chaque solution débloque le niveau suivant.
+      </p>
+      <p>Merci d’avoir exploré mon portfolio. +100 XP pour votre curiosité.</p>
+    </div>
+  </section>
 
   <script>
-    const button = document.getElementById("themeToggle");
-    const icon = document.getElementById("themeIcon");
+    const windows = [...document.querySelectorAll(".window")];
 
-    const sunIcon = `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
-      </svg>`;
+    function openWindow(name) {
+      const win = document.getElementById("win-" + name);
+      if (!win) return;
 
-    const moonIcon = `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"></path>
-      </svg>`;
+      windows.forEach(item => {
+        item.classList.remove("open");
+        item.style.left = "";
+        item.style.top = "";
+        item.style.transform = "";
+      });
 
-    function setTheme(isDark) {
-      document.body.classList.toggle("dark", isDark);
-      button.setAttribute("aria-pressed", String(isDark));
-      button.setAttribute(
-        "aria-label",
-        isDark ? "Activer le mode clair" : "Activer le mode sombre"
-      );
-      icon.innerHTML = isDark ? moonIcon : sunIcon;
+      win.classList.add("open");
 
-      try {
-        localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
-      } catch (error) {
-        // Le thème reste utilisable même si le stockage est indisponible.
+      if (name === "terminal") {
+        setTimeout(() => document.getElementById("commandInput").focus(), 50);
       }
     }
 
-    let savedTheme = "light";
+    // Double-clic sur les icônes du bureau
+    document.querySelectorAll(".desk-icon").forEach(button => {
+      button.addEventListener("dblclick", () => openWindow(button.dataset.open));
+    });
 
-    try {
-      savedTheme = localStorage.getItem("portfolio-theme") || "light";
-    } catch (error) {
-      // Le thème clair est utilisé par défaut.
+    // Raccourcis de la barre du bas
+    document.querySelectorAll(".taskbar [data-open]").forEach(button => {
+      button.addEventListener("click", () => openWindow(button.dataset.open));
+    });
+
+    // Fermer les fenêtres
+    document.querySelectorAll(".close").forEach(button => {
+      button.addEventListener("click", () => {
+        button.closest(".window").classList.remove("open");
+      });
+    });
+
+    // Fermer avec Échap
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        windows.forEach(win => win.classList.remove("open"));
+      }
+    });
+
+    // Déplacer les fenêtres avec leur barre de titre
+    document.querySelectorAll(".titlebar").forEach(bar => {
+      let startX = 0, startY = 0, baseX = 0, baseY = 0;
+      let dragging = false;
+
+      bar.addEventListener("pointerdown", event => {
+        if (event.target.closest("button")) return;
+
+        const win = bar.closest(".window");
+        dragging = true;
+        startX = event.clientX;
+        startY = event.clientY;
+
+        const rect = win.getBoundingClientRect();
+        win.style.transform = "none";
+        win.style.left = rect.left + "px";
+        win.style.top = rect.top + "px";
+        baseX = rect.left;
+        baseY = rect.top;
+
+        bar.setPointerCapture(event.pointerId);
+      });
+
+      bar.addEventListener("pointermove", event => {
+        if (!dragging) return;
+
+        const win = bar.closest(".window");
+        const x = baseX + event.clientX - startX;
+        const y = baseY + event.clientY - startY;
+
+        win.style.left =
+          Math.max(0, Math.min(innerWidth - win.offsetWidth, x)) + "px";
+        win.style.top =
+          Math.max(0, Math.min(innerHeight - 80, y)) + "px";
+      });
+
+      bar.addEventListener("pointerup", () => dragging = false);
+      bar.addEventListener("pointercancel", () => dragging = false);
+    });
+
+    // Horloge
+    const clock = document.getElementById("clock");
+
+    function updateClock() {
+      clock.textContent = new Date().toLocaleTimeString("fr-FR", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     }
 
-    setTheme(savedTheme === "dark");
+    updateClock();
+    setInterval(updateClock, 1000);
 
-    button.addEventListener("click", () => {
-      setTheme(!document.body.classList.contains("dark"));
+    // Thème clair/sombre avec mémorisation
+    const themeButton = document.getElementById("themeToggle");
+
+    try {
+      if (localStorage.getItem("portfolio-theme") === "light") {
+        document.body.classList.add("light");
+      }
+    } catch (error) {}
+
+    themeButton.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+
+      try {
+        localStorage.setItem(
+          "portfolio-theme",
+          document.body.classList.contains("light") ? "light" : "dark"
+        );
+      } catch (error) {}
     });
+
+    // Terminal interactif
+    const input = document.getElementById("commandInput");
+    const output = document.getElementById("terminalOutput");
+
+    const commands = {
+      help: "Commandes : help, about, projects, skills, contact, secret, clear",
+      about: "Sarah Gherri — étudiante en Software Engineering à ESPRIT.",
+      projects: "Projets : AutoLoc, VITA, routeur solaire, Interactive 3D.",
+      skills: "Java, C, C#, Python, Angular, HTML, CSS, JavaScript, MySQL, Unity, IoT.",
+      contact: "Email : gherrisarah@gmail.com | GitHub : Sara-b-gh",
+      secret: "Achievement unlocked : Curiosité +100 XP !"
+    };
+
+    input.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
+
+      const command = input.value.trim().toLowerCase();
+      const safeCommand = command.replace(/[&<>"]/g, "");
+
+      if (command === "clear") {
+        output.innerHTML = "";
+        output.append(createPrompt());
+        input.value = "";
+        return;
+      }
+
+      const result = commands[command] || "Commande inconnue. Tapez help.";
+      const line = document.createElement("div");
+      line.textContent = "visitor@portfolio:~$ " + safeCommand;
+      const response = document.createElement("div");
+      response.textContent = result;
+
+      output.append(line, response, createPrompt());
+      input.value = "";
+      output.scrollTop = output.scrollHeight;
+    });
+
+    function createPrompt() {
+      const label = document.createElement("label");
+      label.htmlFor = "commandInput";
+      label.textContent = "visitor@portfolio:~$ ";
+
+      const field = document.getElementById("commandInput");
+      if (field) return label;
+      return label;
+    }
   </script>
 </body>
 </html>
