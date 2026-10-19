@@ -596,46 +596,20 @@
     <div class="window-body">
       <div class="pixel-label">04 / Parcours</div>
       <h2>Expérience professionnelle</h2>
-      <div class="project-grid">
-        <article class="project">
-          <div class="tag">Janvier 2023 – Février 2023</div>
-          <h3>STEG — Stagiaire</h3>
-          <p>
-            Stage à la Société Tunisienne de l’Électricité et du Gaz à Zarzis.
-            Préparation de documentation technique et présentation des observations
-            aux superviseurs pour faciliter la passation des projets.
-          </p>
-        </article>
-        <article class="project">
-          <div class="tag">Janvier 2024 – Février 2024</div>
-          <h3>MARETAP — Stagiaire en génie électrique</h3>
-          <p>
-            Stage au sein de l’équipe de génie électrique d’une société pétrolière
-            tunisienne. Assistance à l’installation, à l’inspection et aux tests
-            d’équipements électriques, avec contrôles de câblage et de tableaux électriques.
-          </p>
-        </article>
-        <article class="project">
-          <div class="tag">Février 2025 – Mai 2025</div>
-          <h3>Lachhed &amp; Bachtobji Solar Company — Stagiaire</h3>
-          <p>
-            Stage de quatre mois lié au projet de fin d’études : conception,
-            implémentation et test d’un routeur solaire contrôlable à distance,
-            avec interface web locale et application mobile fonctionnant sur le même réseau Wi-Fi.
-            Expérience pratique en énergies renouvelables, IoT et programmation embarquée.
-          </p>
-        </article>
-        <article class="project">
-          <div class="tag">01/07/2026 – 14/08/2026</div>
-          <h3>Tunisie Telecom — Stage d’immersion en entreprise</h3>
-          <p>
-            Immersion au sein de l’Unité de Gestion des Services (UGS), avec
-            participation aux opérations de gestion des abonnés : création
-            et migration de lignes ADSL/VDSL et voix, configuration de modems,
-            gestion des VLAN et traitement des demandes techniques.
-          </p>
-        </article>
-      </div>
+      <article class="project">
+        <div class="tag">Juillet – septembre 2026</div>
+        <h3>Tunisie Telecom — Stage d’observation</h3>
+        <p>
+          Découverte des opérations télécoms et participation au traitement
+          des demandes : activation et désactivation de lignes, changement
+          de localisation, problèmes de connexion, équipements et suivi
+          des interventions.
+        </p>
+      </article>
+      <p>
+        Mon parcours académique et mes projets m’aident à relier
+        développement logiciel, systèmes et expérience utilisateur.
+      </p>
     </div>
   </section>
 
@@ -686,10 +660,6 @@
     <div class="window-body">
       <div class="pixel-label">Fichier local</div>
       <h2>Mon CV</h2>
-      <p>
-        Ajoutez votre CV au dépôt sous le nom <strong>cv.pdf</strong>
-        pour activer le téléchargement.
-      </p>
       <a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">
         Ouvrir cv.pdf ↗
       </a>
@@ -998,3 +968,21 @@
         if (lives <= 0) { endGame("Le fantôme t’a attrapée ! Recommence pour rejouer."); return; }
       }
       drawGame();
+    }
+
+    gameStart.addEventListener("click", startGame);
+    document.querySelectorAll("[data-move]").forEach(button => {
+      button.addEventListener("click", () => {
+        const moves = {up:[0,-1], down:[0,1], left:[-1,0], right:[1,0]};
+        const [dx,dy] = moves[button.dataset.move]; movePlayer(dx,dy);
+      });
+    });
+    document.addEventListener("keydown", event => {
+      if (!gameRunning || !document.getElementById("win-game").classList.contains("open")) return;
+      const moves = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]};
+      if (moves[event.key]) { event.preventDefault(); movePlayer(...moves[event.key]); }
+    });
+    drawGame();
+  </script>
+</body>
+</html>
