@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -85,7 +86,6 @@
       font-size: 12px;
     }
 
-    /* Icônes du bureau */
     .desktop-icons {
       display: grid;
       grid-template-columns: repeat(4, minmax(100px, 140px));
@@ -127,7 +127,6 @@
       font-size: 11px;
     }
 
-    /* Fenêtres */
     .window {
       display: none;
       position: fixed;
@@ -200,7 +199,6 @@
 
     .window-body a { color: var(--green); }
 
-    /* Cartes des projets */
     .project-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -241,7 +239,6 @@
       font-size: 12px;
     }
 
-    /* Barre de raccourcis */
     .taskbar {
       position: sticky;
       bottom: 12px;
@@ -262,26 +259,96 @@
 
     .taskbar button:hover { border-color: var(--green); }
 
-    /* Mini-jeu rétro */
-    .game-shell { background: #0b111c; border: 1px solid var(--line); border-radius: 12px; padding: 14px; color: #f1f5ff; }
-    .game-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-    .game-stats { display: flex; gap: 14px; color: var(--green); font-size: 12px; }
-    .game-board { display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: 3px; max-width: 480px; margin: auto; }
-    .game-cell { aspect-ratio: 1; display: grid; place-items: center; background: #121b2b; border-radius: 3px; font-size: clamp(8px, 2vw, 16px); }
-    .game-cell.wall { background: #344bc0; box-shadow: inset 0 0 0 1px #697cff; }
-    .game-cell.dot::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #fff1b8; }
+    .game-shell {
+      background: #0b111c;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      color: #f1f5ff;
+    }
+
+    .game-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .game-stats {
+      display: flex;
+      gap: 14px;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(15, minmax(0, 1fr));
+      gap: 3px;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    .game-cell {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      background: #121b2b;
+      border-radius: 3px;
+      font-size: clamp(8px, 2vw, 16px);
+    }
+
+    .game-cell.wall {
+      background: #344bc0;
+      box-shadow: inset 0 0 0 1px #697cff;
+    }
+
+    .game-cell.dot::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #fff1b8;
+    }
+
     .game-cell.player { color: #ffe45c; }
     .game-cell.ghost { color: #ff718a; }
     .game-cell.ghost.pink { color: #ff8de1; }
     .game-cell.ghost.blue { color: #68e5ff; }
     .game-cell.ghost.orange { color: #ffad5c; }
-    .game-cell.portal { background: #532a8b; box-shadow: inset 0 0 0 1px #d4a4ff; }
-    .game-controls { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-    .game-controls button { min-width: 42px; padding: 10px; color: var(--text); background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; }
-    .game-note { text-align: center; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+    .game-cell.portal {
+      background: #532a8b;
+      box-shadow: inset 0 0 0 1px #d4a4ff;
+    }
+
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .game-controls button {
+      min-width: 42px;
+      padding: 10px;
+      color: var(--text);
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .game-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
     body.light .game-shell { background: #172033; }
 
-    /* Terminal */
     .terminal {
       padding: 16px;
       overflow-wrap: anywhere;
@@ -307,7 +374,113 @@
       font-size: 11px;
     }
 
-    /* Thème clair */
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 18px 0 12px;
+    }
+
+    .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      text-decoration: none;
+      transition: color .2s, background .2s, transform .2s;
+    }
+
+    .footer-socials a:hover {
+      color: var(--green);
+      background: #ffffff0d;
+      transform: translateY(-3px);
+    }
+
+    .footer-socials svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .contact-form { display: grid; gap: 14px; }
+
+    .contact-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 7px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      color: var(--text);
+      background: #0d1421;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    body.light .contact-form input,
+    body.light .contact-form select,
+    body.light .contact-form textarea {
+      background: #f7f9ff;
+    }
+
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+
+    .contact-form button {
+      justify-self: start;
+      padding: 11px 18px;
+      color: #171923;
+      background: var(--text);
+      border: 0;
+      border-radius: 999px;
+    }
+
+    .contact-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      text-align: center;
+      border-left: 1px solid var(--line);
+      padding-left: 24px;
+    }
+
+    .contact-side h3 {
+      margin: 0 0 12px;
+      font-size: clamp(18px, 2.5vw, 26px);
+    }
+
+    .contact-side p { margin: 0; }
+    .contact-side a { color: var(--muted); text-decoration: none; }
+    .contact-side .footer-socials { margin: 10px 0 0; }
+    .contact-side .footer-socials a { color: var(--muted); }
+
     body.light {
       --bg: #edf1fb;
       --panel: #ffffff;
@@ -321,9 +494,7 @@
     }
 
     body.light .topbar,
-    body.light .taskbar button {
-      background: #ffffffdf;
-    }
+    body.light .taskbar button { background: #ffffffdf; }
 
     body.light .project { background: #f3f6fc; }
 
@@ -364,6 +535,15 @@
       .topbar { font-size: 12px; }
       .status { display: none; }
       .theme { right: 12px; bottom: 12px; }
+      .contact-layout { grid-template-columns: 1fr; }
+
+      .contact-side {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding: 24px 0 0;
+      }
+
+      .contact-form .form-row { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -403,59 +583,15 @@
       </section>
 
       <section class="desktop-icons" aria-label="Bureau interactif">
-        <button class="desk-icon" data-open="about">
-          <span class="emoji">🪪</span>
-          <span>À propos</span>
-          <small>about.txt</small>
-        </button>
-
-        <button class="desk-icon" data-open="projects">
-          <span class="emoji">📁</span>
-          <span>Mes projets</span>
-          <small>projects/</small>
-        </button>
-
-        <button class="desk-icon" data-open="skills">
-          <span class="emoji">🧰</span>
-          <span>Compétences</span>
-          <small>skills.exe</small>
-        </button>
-
-        <button class="desk-icon" data-open="experience">
-          <span class="emoji">🗂️</span>
-          <span>Expérience</span>
-          <small>experience.log</small>
-        </button>
-
-        <button class="desk-icon" data-open="terminal">
-          <span class="emoji">💻</span>
-          <span>Terminal</span>
-          <small>cmd.exe</small>
-        </button>
-
-        <button class="desk-icon" data-open="contact">
-          <span class="emoji">✉️</span>
-          <span>Contact</span>
-          <small>contact.vcf</small>
-        </button>
-
-        <button class="desk-icon" data-open="cv">
-          <span class="emoji">📄</span>
-          <span>Mon CV</span>
-          <small>cv.pdf</small>
-        </button>
-
-        <button class="desk-icon" data-open="game">
-          <span class="emoji">🟡</span>
-          <span>Mini-jeu</span>
-          <small>sara-man.exe</small>
-        </button>
-
-        <button class="desk-icon" data-open="secret">
-          <span class="emoji">🎮</span>
-          <span>Secret</span>
-          <small>???</small>
-        </button>
+        <button class="desk-icon" data-open="about"><span class="emoji">🪪</span><span>À propos</span><small>about.txt</small></button>
+        <button class="desk-icon" data-open="projects"><span class="emoji">📁</span><span>Mes projets</span><small>projects/</small></button>
+        <button class="desk-icon" data-open="skills"><span class="emoji">🧰</span><span>Compétences</span><small>skills.exe</small></button>
+        <button class="desk-icon" data-open="experience"><span class="emoji">🗂️</span><span>Expérience</span><small>experience.log</small></button>
+        <button class="desk-icon" data-open="terminal"><span class="emoji">💻</span><span>Terminal</span><small>cmd.exe</small></button>
+        <button class="desk-icon" data-open="contact"><span class="emoji">✉️</span><span>Contact</span><small>contact.vcf</small></button>
+        <button class="desk-icon" data-open="cv"><span class="emoji">📄</span><span>Mon CV</span><small>cv.pdf</small></button>
+        <button class="desk-icon" data-open="game"><span class="emoji">🟡</span><span>Mini-jeu</span><small>sara-man.exe</small></button>
+        <button class="desk-icon" data-open="secret"><span class="emoji">🎮</span><span>Secret</span><small>???</small></button>
       </section>
     </main>
 
@@ -467,110 +603,64 @@
     </div>
 
     <div class="footer">
+      <nav class="footer-socials" aria-label="Réseaux sociaux">
+        <a href="https://github.com/Sara-b-gh" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/sara-gherri-34968b315/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/sara.b._.gh/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
       © 2026 Sara Gherri · Fait avec curiosité, café et quelques bugs.
     </div>
   </div>
 
-  <button class="theme" id="themeToggle" type="button">
-    ☼ Changer de thème
-  </button>
+  <button class="theme" id="themeToggle" type="button">☼ Changer de thème</button>
 
-  <!-- Fenêtre À propos -->
-  <section class="window" id="win-about" role="dialog" aria-modal="true"
-    aria-labelledby="title-about">
-    <div class="titlebar">
-      <span class="window-title" id="title-about">about.txt — Bloc-notes</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-about" role="dialog" aria-modal="true" aria-labelledby="title-about">
+    <div class="titlebar"><span class="window-title" id="title-about">about.txt — Bloc-notes</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">01 / Profil</div>
       <h2>Un peu de moi 👋</h2>
-      <p>
-        Je suis étudiante ingénieure en informatique à ESPRIT, passionnée
-        par le développement logiciel, les interfaces et la résolution
-        de problèmes. J’aime transformer une idée en application concrète
-        et apprendre en construisant.
-      </p>
-      <p>
-        Curieuse, organisée et communicative, j’apprécie le travail
-        en équipe et les projets qui mêlent logique, créativité et technologie.
-      </p>
-      <p>
-        <strong>Mon objectif :</strong> continuer à progresser en
-        Software Engineering et contribuer à des projets utiles.
-      </p>
+      <p>Je suis étudiante ingénieure en informatique à ESPRIT, passionnée par le développement logiciel, les interfaces et la résolution de problèmes. J’aime transformer une idée en application concrète et apprendre en construisant.</p>
+      <p>Curieuse, organisée et communicative, j’apprécie le travail en équipe et les projets qui mêlent logique, créativité et technologie.</p>
+      <p><strong>Mon objectif :</strong> continuer à progresser en Software Engineering et contribuer à des projets utiles.</p>
     </div>
   </section>
 
-  <!-- Fenêtre Projets -->
-  <section class="window" id="win-projects" role="dialog" aria-modal="true"
-    aria-labelledby="title-projects">
-    <div class="titlebar">
-      <span class="window-title" id="title-projects">projects/ — Explorateur</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-projects" role="dialog" aria-modal="true" aria-labelledby="title-projects">
+    <div class="titlebar"><span class="window-title" id="title-projects">projects/ — Explorateur</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">02 / Réalisations</div>
       <h2>Mes projets</h2>
-
       <div class="project-grid">
         <article class="project">
           <div class="tag">Java · Spring Boot · MySQL</div>
           <h3>🚗 AutoLoc</h3>
-          <p>
-            Application de gestion de location de véhicules avec backend
-            Spring Boot, JPA/Hibernate et modèle de données relationnel.
-          </p>
-          <a class="action" href="https://github.com/Sara-b-gh/AutoLoc"
-             target="_blank" rel="noopener noreferrer">
-            Ouvrir sur GitHub ↗
-          </a>
+          <p>Application de gestion de location de véhicules avec backend Spring Boot, JPA/Hibernate et modèle de données relationnel.</p>
+          <a class="action" href="https://github.com/Sara-b-gh/AutoLoc" target="_blank" rel="noopener noreferrer">Ouvrir sur GitHub ↗</a>
         </article>
-
         <article class="project">
           <div class="tag">JavaFX · MySQL</div>
           <h3>🏥 VITA</h3>
-          <p>
-            Système de gestion hospitalière avec interfaces JavaFX
-            et données centralisées.
-          </p>
-          <a class="action" href="https://github.com/Sara-b-gh/Vita"
-             target="_blank" rel="noopener noreferrer">
-            Ouvrir sur GitHub ↗
-          </a>
+          <p>Système de gestion hospitalière avec interfaces JavaFX et données centralisées.</p>
+          <a class="action" href="https://github.com/Sara-b-gh/Vita" target="_blank" rel="noopener noreferrer">Ouvrir sur GitHub ↗</a>
         </article>
-
         <article class="project">
           <div class="tag">Embedded · IoT</div>
           <h3>☀️ Routeur solaire</h3>
-          <p>
-            Projet de fin d’études développé autour d’un routeur solaire
-            contrôlable à distance, avec interface web locale
-            et application mobile.
-          </p>
+          <p>Projet de fin d’études développé autour d’un routeur solaire contrôlable à distance, avec interface web locale et application mobile.</p>
           <span class="tag">Projet développé</span>
         </article>
-
         <article class="project">
           <div class="tag">Unity · 3D · XR</div>
           <h3>🪐 Interactive 3D</h3>
-          <p>
-            Expériences Unity autour de la 3D interactive,
-            de la simulation et des applications XR.
-          </p>
+          <p>Expériences Unity autour de la 3D interactive, de la simulation et des applications XR.</p>
           <span class="tag">Unity / C#</span>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Fenêtre Compétences -->
-  <section class="window" id="win-skills" role="dialog" aria-modal="true"
-    aria-labelledby="title-skills">
-    <div class="titlebar">
-      <span class="window-title" id="title-skills">skills.exe — Inventaire</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-skills" role="dialog" aria-modal="true" aria-labelledby="title-skills">
+    <div class="titlebar"><span class="window-title" id="title-skills">skills.exe — Inventaire</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">03 / Toolkit</div>
       <h2>Mon inventaire technique</h2>
@@ -579,99 +669,110 @@
       <p>🗄️ <strong>Données :</strong> MySQL, Oracle XE</p>
       <p>🎮 <strong>Création :</strong> Unity, 3D, XR</p>
       <p>🔌 <strong>Systèmes :</strong> systèmes embarqués, IoT</p>
-      <p>
-        🌐 <strong>Réseaux et outils :</strong> TCP/IP, Linux/Unix,
-        Packet Tracer, IntelliJ IDEA, Visual Studio
-      </p>
+      <p>🌐 <strong>Réseaux et outils :</strong> TCP/IP, Linux/Unix, Packet Tracer, IntelliJ IDEA, Visual Studio</p>
     </div>
   </section>
 
-  <!-- Fenêtre Expérience -->
-  <section class="window" id="win-experience" role="dialog" aria-modal="true"
-    aria-labelledby="title-experience">
-    <div class="titlebar">
-      <span class="window-title" id="title-experience">experience.log — Journal</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-experience" role="dialog" aria-modal="true" aria-labelledby="title-experience">
+    <div class="titlebar"><span class="window-title" id="title-experience">experience.log — Journal</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">04 / Parcours</div>
       <h2>Expérience professionnelle</h2>
-      <article class="project">
-        <div class="tag">Juillet – septembre 2026</div>
-        <h3>Tunisie Telecom — Stage d’observation</h3>
-        <p>
-          Découverte des opérations télécoms et participation au traitement
-          des demandes : activation et désactivation de lignes, changement
-          de localisation, problèmes de connexion, équipements et suivi
-          des interventions.
-        </p>
-      </article>
-      <p>
-        Mon parcours académique et mes projets m’aident à relier
-        développement logiciel, systèmes et expérience utilisateur.
-      </p>
-    </div>
-  </section>
-
-  <!-- Fenêtre Terminal -->
-  <section class="window" id="win-terminal" role="dialog" aria-modal="true"
-    aria-labelledby="title-terminal">
-    <div class="titlebar">
-      <span class="window-title" id="title-terminal">cmd.exe — Terminal Sara</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
-    <div class="window-body">
-      <div class="terminal" id="terminalOutput" aria-live="polite">
-        SARA OS [Version 1.0.26]<br>
-        Bienvenue ! Tapez <strong>help</strong> pour voir les commandes.<br>
-        <label for="commandInput">visitor@portfolio:~$ </label>
-        <input id="commandInput" autocomplete="off"
-          placeholder="help puis Entrée">
+      <div class="project-grid">
+        <article class="project">
+          <div class="tag">Janvier 2023 – Février 2023</div>
+          <h3>STEG — Stagiaire</h3>
+          <p>Stage à la Société Tunisienne de l’Électricité et du Gaz à Zarzis. Préparation de documentation technique et présentation des observations aux superviseurs pour faciliter la passation des projets.</p>
+        </article>
+        <article class="project">
+          <div class="tag">Janvier 2024 – Février 2024</div>
+          <h3>MARETAP — Stagiaire en génie électrique</h3>
+          <p>Stage au sein de l’équipe de génie électrique d’une société pétrolière tunisienne. Assistance à l’installation, à l’inspection et aux tests d’équipements électriques, avec contrôles de câblage et de tableaux électriques.</p>
+        </article>
+        <article class="project">
+          <div class="tag">Février 2025 – Mai 2025</div>
+          <h3>Lachhed &amp; Bachtobji Solar Company — Stagiaire</h3>
+          <p>Stage de quatre mois lié au projet de fin d’études : conception, implémentation et test d’un routeur solaire contrôlable à distance, avec interface web locale et application mobile fonctionnant sur le même réseau Wi-Fi. Expérience pratique en énergies renouvelables, IoT et programmation embarquée.</p>
+        </article>
+        <article class="project">
+          <div class="tag">01/07/2026 – 14/08/2026</div>
+          <h3>Tunisie Telecom — Stage d’immersion en entreprise</h3>
+          <p>Immersion au sein de l’Unité de Gestion des Services (UGS), avec participation aux opérations de gestion des abonnés : création et migration de lignes ADSL/VDSL et voix, configuration de modems, gestion des VLAN et traitement des demandes techniques.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Fenêtre Contact -->
-  <section class="window" id="win-contact" role="dialog" aria-modal="true"
-    aria-labelledby="title-contact">
-    <div class="titlebar">
-      <span class="window-title" id="title-contact">contact.vcf — Carte de visite</span>
-      <button class="close" aria-label="Fermer">×</button>
+  <section class="window" id="win-terminal" role="dialog" aria-modal="true" aria-labelledby="title-terminal">
+    <div class="titlebar"><span class="window-title" id="title-terminal">cmd.exe — Terminal Sara</span><button class="close" aria-label="Fermer">×</button></div>
+    <div class="window-body">
+      <div class="terminal" id="terminalOutput">
+        SARA OS [Version 1.0.26]<br>
+        Bienvenue ! Tapez <strong>help</strong> pour voir les commandes.<br>
+        <label for="commandInput">visitor@portfolio:~$ </label>
+        <input id="commandInput" autocomplete="off" placeholder="help puis Entrée">
+      </div>
     </div>
+  </section>
+
+  <section class="window" id="win-contact" role="dialog" aria-modal="true" aria-labelledby="title-contact">
+    <div class="titlebar"><span class="window-title" id="title-contact">contact.vcf — Carte de visite</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">05 / Connexion</div>
       <h2>On se parle ? ✉️</h2>
-      <p><strong>🔎 Je suis à la recherche d’un stage !</strong> Je serais ravie d’échanger avec vous au sujet d’une opportunité.</p>
-      <p>
-        Une opportunité de stage, un projet ou simplement envie d’échanger ?
-        Mon terminal est ouvert.
-      </p>
-      <p>📧 <a href="mailto:gherrisarah@gmail.com">gherrisarah@gmail.com</a></p>
+      <div class="contact-layout">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <label>Prénom<input name="firstName" autocomplete="given-name" placeholder="Votre prénom" required></label>
+            <label>Nom<input name="lastName" autocomplete="family-name" placeholder="Votre nom" required></label>
+          </div>
+          <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="nom@exemple.com" required></label>
+          <div class="form-row">
+            <label>Entreprise<input name="company" autocomplete="organization" placeholder="Entreprise (facultatif)"></label>
+            <label>Poste<input name="position" placeholder="Poste (facultatif)"></label>
+          </div>
+          <label>Type
+            <select name="type">
+              <option>Demande de stage</option>
+              <option>Opportunité professionnelle</option>
+              <option>Projet collaboratif</option>
+              <option>Autre demande</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" placeholder="Écrivez votre message ici…" required></textarea></label>
+          <button type="submit">Envoyer</button>
+          <p id="contactFormNote" role="status" aria-live="polite" style="font-size:12px;margin:0"></p>
+        </form>
+        <div class="contact-side">
+          <div>
+            <h3>Ou contactez-moi directement par e-mail</h3>
+            <p>✉️ <a href="mailto:gherrisarah@gmail.com">gherrisarah@gmail.com</a></p>
+          </div>
+          <div>
+            <h3>Retrouvons-nous sur les réseaux</h3>
+            <nav class="footer-socials" aria-label="Réseaux sociaux">
+              <a href="https://github.com/Sara-b-gh" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/sara-gherri-34968b315/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.instagram.com/sara.b._.gh/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Fenêtre CV -->
-  <section class="window" id="win-cv" role="dialog" aria-modal="true"
-    aria-labelledby="title-cv">
-    <div class="titlebar">
-      <span class="window-title" id="title-cv">cv.pdf — Aperçu</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-cv" role="dialog" aria-modal="true" aria-labelledby="title-cv">
+    <div class="titlebar"><span class="window-title" id="title-cv">cv.pdf — Aperçu</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">Fichier local</div>
       <h2>Mon CV</h2>
-      <a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">
-        Ouvrir cv.pdf ↗
-      </a>
+      <p>Ajoutez votre CV au dépôt sous le nom <strong>cv.pdf</strong> pour activer le téléchargement.</p>
+      <a class="action" href="cv.pdf" target="_blank" rel="noopener noreferrer">Ouvrir cv.pdf ↗</a>
     </div>
   </section>
 
-  <!-- Fenêtre secrète -->
   <section class="window" id="win-game" role="dialog" aria-modal="true" aria-labelledby="title-game">
-    <div class="titlebar">
-      <span class="window-title" id="title-game">sara-man.exe — Mini-jeu</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+    <div class="titlebar"><span class="window-title" id="title-game">sara-man.exe — Mini-jeu</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">Bonus / Arcade</div>
       <h2>🟡 Sara-Man</h2>
@@ -679,7 +780,10 @@
       <div class="game-shell">
         <div class="game-head">
           <strong>PLAYER 1</strong>
-          <div class="game-stats"><span>Score : <b id="gameScore">0</b></span><span>Vies : <b id="gameLives">3</b></span></div>
+          <div class="game-stats">
+            <span>Score : <b id="gameScore">0</b></span>
+            <span>Vies : <b id="gameLives">3</b></span>
+          </div>
           <button class="action" id="gameStart" type="button">Jouer / Recommencer</button>
         </div>
         <div id="gameBoard" class="game-board" role="grid" aria-label="Labyrinthe Sara-Man"></div>
@@ -694,19 +798,12 @@
     </div>
   </section>
 
-  <section class="window" id="win-secret" role="dialog" aria-modal="true"
-    aria-labelledby="title-secret">
-    <div class="titlebar">
-      <span class="window-title" id="title-secret">secret.txt — Fichier caché</span>
-      <button class="close" aria-label="Fermer">×</button>
-    </div>
+  <section class="window" id="win-secret" role="dialog" aria-modal="true" aria-labelledby="title-secret">
+    <div class="titlebar"><span class="window-title" id="title-secret">secret.txt — Fichier caché</span><button class="close" aria-label="Fermer">×</button></div>
     <div class="window-body">
       <div class="pixel-label">Achievement unlocked</div>
       <h2>🎉 Vous avez trouvé le secret !</h2>
-      <p>
-        Dans le développement comme dans un jeu, chaque bug est une énigme
-        et chaque solution débloque le niveau suivant.
-      </p>
+      <p>Dans le développement comme dans un jeu, chaque bug est une énigme et chaque solution débloque le niveau suivant.</p>
       <p>Merci d’avoir exploré mon portfolio. +100 XP pour votre curiosité.</p>
     </div>
   </section>
@@ -726,45 +823,39 @@
       });
 
       win.classList.add("open");
+      win.scrollTop = 0;
 
       if (name === "terminal") {
         setTimeout(() => document.getElementById("commandInput").focus(), 50);
       }
     }
 
-    // Ouvrir les icônes au clic ou double-clic
-    document.querySelectorAll(".desk-icon").forEach(button => {
-      button.addEventListener("click", () => openWindow(button.dataset.open));
-      button.addEventListener("dblclick", () => openWindow(button.dataset.open));
+    document.addEventListener("click", event => {
+      const opener = event.target.closest("[data-open]");
+      if (opener) {
+        openWindow(opener.dataset.open);
+        return;
+      }
+
+      const closer = event.target.closest(".close");
+      if (closer) {
+        const win = closer.closest(".window");
+        if (win) win.classList.remove("open");
+      }
     });
 
-    // Raccourcis de la barre du bas
-    document.querySelectorAll(".taskbar [data-open]").forEach(button => {
-      button.addEventListener("click", () => openWindow(button.dataset.open));
-    });
-
-    // Fermer les fenêtres
-    document.querySelectorAll(".close").forEach(button => {
-      button.addEventListener("click", () => {
-        button.closest(".window").classList.remove("open");
-      });
-    });
-
-    // Fermer avec Échap
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         windows.forEach(win => win.classList.remove("open"));
       }
     });
 
-    // Déplacer les fenêtres avec leur barre de titre
     document.querySelectorAll(".titlebar").forEach(bar => {
       let startX = 0, startY = 0, baseX = 0, baseY = 0;
       let dragging = false;
 
       bar.addEventListener("pointerdown", event => {
         if (event.target.closest("button")) return;
-
         const win = bar.closest(".window");
         dragging = true;
         startX = event.clientX;
@@ -776,28 +867,23 @@
         win.style.top = rect.top + "px";
         baseX = rect.left;
         baseY = rect.top;
-
         bar.setPointerCapture(event.pointerId);
       });
 
       bar.addEventListener("pointermove", event => {
         if (!dragging) return;
-
         const win = bar.closest(".window");
         const x = baseX + event.clientX - startX;
         const y = baseY + event.clientY - startY;
 
-        win.style.left =
-          Math.max(0, Math.min(innerWidth - win.offsetWidth, x)) + "px";
-        win.style.top =
-          Math.max(0, Math.min(innerHeight - 80, y)) + "px";
+        win.style.left = Math.max(0, Math.min(innerWidth - win.offsetWidth, x)) + "px";
+        win.style.top = Math.max(0, Math.min(innerHeight - 80, y)) + "px";
       });
 
       bar.addEventListener("pointerup", () => dragging = false);
       bar.addEventListener("pointercancel", () => dragging = false);
     });
 
-    // Horloge
     const clock = document.getElementById("clock");
 
     function updateClock() {
@@ -810,7 +896,6 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Thème clair/sombre avec mémorisation
     const themeButton = document.getElementById("themeToggle");
 
     try {
@@ -821,7 +906,6 @@
 
     themeButton.addEventListener("click", () => {
       document.body.classList.toggle("light");
-
       try {
         localStorage.setItem(
           "portfolio-theme",
@@ -830,7 +914,35 @@
       } catch (error) {}
     });
 
-    // Terminal interactif
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = new FormData(form);
+      const firstName = data.get("firstName").trim();
+      const lastName = data.get("lastName").trim();
+      const email = data.get("email").trim();
+      const company = data.get("company").trim();
+      const position = data.get("position").trim();
+      const type = data.get("type");
+      const message = data.get("message").trim();
+
+      const subject = encodeURIComponent(type + " — Message de " + firstName + " " + lastName);
+      const body = encodeURIComponent(
+        "Nom : " + firstName + " " + lastName +
+        "\nE-mail : " + email +
+        "\nEntreprise : " + (company || "Non renseignée") +
+        "\nPoste : " + (position || "Non renseigné") +
+        "\nType : " + type +
+        "\n\nMessage :\n" + message
+      );
+
+      document.getElementById("contactFormNote").textContent =
+        "Votre application e-mail va s’ouvrir avec le message prérempli.";
+
+      window.location.href =
+        "mailto:gherrisarah@gmail.com?subject=" + subject + "&body=" + body;
+    });
+
     const input = document.getElementById("commandInput");
     const output = document.getElementById("terminalOutput");
 
@@ -838,7 +950,7 @@
       help: "Commandes : help, about, projects, skills, contact, pfe, secret, clear",
       about: "Sara Gherri — étudiante en Software Engineering à ESPRIT.",
       projects: "Projets : AutoLoc, VITA, routeur solaire développé, Interactive 3D.",
-      pfe: "Le projet de routeur solaire avec contrôle à distance, interface web locale et application mobile est développé.",
+      pfe: "Projet de routeur solaire avec contrôle à distance, interface web locale et application mobile.",
       skills: "Java, C, C#, Python, Angular, HTML, CSS, JavaScript, MySQL, Unity, IoT.",
       contact: "Email : gherrisarah@gmail.com",
       secret: "Achievement unlocked : Curiosité +100 XP !"
@@ -853,9 +965,12 @@
     input.addEventListener("keydown", event => {
       if (event.key !== "Enter") return;
       event.preventDefault();
+
       const command = input.value.trim().toLowerCase();
       if (!command) return;
+
       printTerminalLine("visitor@portfolio:~$ " + command.replace(/[&<>"]/g, ""));
+
       if (command === "clear") {
         [...output.children].forEach(child => {
           if (child.id !== "commandInput" && !child.contains(input)) child.remove();
@@ -863,44 +978,70 @@
       } else {
         printTerminalLine(commands[command] || "Commande inconnue. Tapez help.");
       }
+
       input.value = "";
       output.scrollTop = output.scrollHeight;
     });
 
-    // Mini-jeu Sara-Man
     const gameBoard = document.getElementById("gameBoard");
     const gameScore = document.getElementById("gameScore");
     const gameLives = document.getElementById("gameLives");
     const gameMessage = document.getElementById("gameMessage");
     const gameStart = document.getElementById("gameStart");
+
     const mazeTemplate = [
-      "###############", "#.............#", "#.###.###.###.#",
-      "#.............#", "###.#.###.#.###", "#...#.....#...#",
-      "#.###.#.#.###.#", "#.....#.#.....#", "#.###.#.#.###.#",
-      "#...#.....#...#", "###.#.###.#.###", "#.............#",
-      "#.###.###.###.#", "#.............#", "###############"
+      "###############",
+      "#.............#",
+      "#.###.###.###.#",
+      "#.............#",
+      "###.#.###.#.###",
+      "#...#.....#...#",
+      "#.###.#.#.###.#",
+      "#.....#.#.....#",
+      "#.###.#.#.###.#",
+      "#...#.....#...#",
+      "###.#.###.#.###",
+      "#.............#",
+      "#.###.###.###.#",
+      "#.............#",
+      "###############"
     ];
-    let maze = [], player = {x:1,y:1};
+
+    let maze = [];
+    let player = {x:1,y:1};
+
     const ghostStarts = [
       {x:13,y:13,emoji:"👻",color:""},
       {x:13,y:1,emoji:"👻",color:"pink"},
       {x:1,y:13,emoji:"👻",color:"blue"},
       {x:7,y:11,emoji:"👻",color:"orange"}
     ];
+
     let ghosts = [];
-    const portals = [{x:1,y:7,to:{x:13,y:7}},{x:13,y:7,to:{x:1,y:7}}];
+    const portals = [
+      {x:1,y:7,to:{x:13,y:7}},
+      {x:13,y:7,to:{x:1,y:7}}
+    ];
+
     let score = 0, lives = 3, gameRunning = false, gameTimer = null;
 
     function drawGame() {
       gameBoard.replaceChildren();
+
       maze.forEach((row, y) => row.forEach((cell, x) => {
         const tile = document.createElement("div");
         const portal = portals.find(p => p.x === x && p.y === y);
         const ghostHere = ghosts.find(g => g.x === x && g.y === y);
-        tile.className = "game-cell" + (cell === "#" ? " wall" : cell === "." ? " dot" : "") + (portal ? " portal" : "");
+
+        tile.className = "game-cell" +
+          (cell === "#" ? " wall" : cell === "." ? " dot" : "") +
+          (portal ? " portal" : "");
+
         tile.setAttribute("role", "gridcell");
+
         if (player.x === x && player.y === y) {
-          tile.classList.add("player"); tile.textContent = "😺";
+          tile.classList.add("player");
+          tile.textContent = "😺";
         } else if (ghostHere) {
           tile.classList.add("ghost");
           if (ghostHere.color) tile.classList.add(ghostHere.color);
@@ -908,15 +1049,19 @@
         } else if (portal) {
           tile.textContent = "🌀";
         }
+
         gameBoard.appendChild(tile);
       }));
+
       gameScore.textContent = score;
       gameLives.textContent = lives;
     }
 
     function endGame(message) {
-      gameRunning = false; clearInterval(gameTimer);
-      gameMessage.textContent = message; drawGame();
+      gameRunning = false;
+      clearInterval(gameTimer);
+      gameMessage.textContent = message;
+      drawGame();
     }
 
     function startGame() {
@@ -924,7 +1069,9 @@
       maze = mazeTemplate.map(row => row.split(""));
       player = {x:1,y:1};
       ghosts = ghostStarts.map(g => ({...g}));
-      score = 0; lives = 3; gameRunning = true;
+      score = 0;
+      lives = 3;
+      gameRunning = true;
       gameMessage.textContent = "À toi de jouer ! Mange tous les points.";
       drawGame();
       gameTimer = setInterval(moveGhost, 700);
@@ -932,56 +1079,114 @@
 
     function movePlayer(dx, dy) {
       if (!gameRunning) return;
-      let nx = player.x + dx, ny = player.y + dy;
+
+      let nx = player.x + dx;
+      let ny = player.y + dy;
+
       if (!maze[ny] || maze[ny][nx] === "#" || maze[ny][nx] === undefined) return;
+
       const portal = portals.find(p => p.x === nx && p.y === ny);
-      if (portal) { nx = portal.to.x; ny = portal.to.y; }
+      if (portal) {
+        nx = portal.to.x;
+        ny = portal.to.y;
+      }
+
       player = {x:nx,y:ny};
-      if (maze[ny][nx] === ".") { maze[ny][nx] = " "; score += 10; }
+
+      if (maze[ny][nx] === ".") {
+        maze[ny][nx] = " ";
+        score += 10;
+      }
+
       if (ghosts.some(g => player.x === g.x && player.y === g.y)) {
-        lives--; player = {x:1,y:1};
-        if (lives <= 0) { endGame("Partie terminée ! Recommence pour rejouer."); return; }
+        lives--;
+        player = {x:1,y:1};
+        if (lives <= 0) {
+          endGame("Partie terminée ! Recommence pour rejouer.");
+          return;
+        }
       }
+
       if (!maze.some(row => row.includes("."))) {
-        score += 100; endGame("Bravo ! Labyrinthe terminé 🎉 Score : " + score); return;
+        score += 100;
+        endGame("Bravo ! Labyrinthe terminé 🎉 Score : " + score);
+        return;
       }
+
       drawGame();
     }
 
     function moveGhost() {
       if (!gameRunning) return;
+
       ghosts.forEach(ghost => {
         const options = [[0,-1],[0,1],[-1,0],[1,0]].filter(([dx,dy]) =>
-          maze[ghost.y + dy] && maze[ghost.y + dy][ghost.x + dx] &&
+          maze[ghost.y + dy] &&
+          maze[ghost.y + dy][ghost.x + dx] &&
           maze[ghost.y + dy][ghost.x + dx] !== "#"
         );
+
         if (options.length) {
           const [dx,dy] = options[Math.floor(Math.random() * options.length)];
-          let nx = ghost.x + dx, ny = ghost.y + dy;
+          let nx = ghost.x + dx;
+          let ny = ghost.y + dy;
           const portal = portals.find(p => p.x === nx && p.y === ny);
-          if (portal) { nx = portal.to.x; ny = portal.to.y; }
-          ghost.x = nx; ghost.y = ny;
+
+          if (portal) {
+            nx = portal.to.x;
+            ny = portal.to.y;
+          }
+
+          ghost.x = nx;
+          ghost.y = ny;
         }
       });
+
       if (ghosts.some(g => player.x === g.x && player.y === g.y)) {
-        lives--; player = {x:1,y:1};
-        if (lives <= 0) { endGame("Le fantôme t’a attrapée ! Recommence pour rejouer."); return; }
+        lives--;
+        player = {x:1,y:1};
+
+        if (lives <= 0) {
+          endGame("Le fantôme t’a attrapée ! Recommence pour rejouer.");
+          return;
+        }
       }
+
       drawGame();
     }
 
     gameStart.addEventListener("click", startGame);
+
     document.querySelectorAll("[data-move]").forEach(button => {
       button.addEventListener("click", () => {
-        const moves = {up:[0,-1], down:[0,1], left:[-1,0], right:[1,0]};
-        const [dx,dy] = moves[button.dataset.move]; movePlayer(dx,dy);
+        const moves = {
+          up:[0,-1],
+          down:[0,1],
+          left:[-1,0],
+          right:[1,0]
+        };
+        const [dx,dy] = moves[button.dataset.move];
+        movePlayer(dx,dy);
       });
     });
+
     document.addEventListener("keydown", event => {
-      if (!gameRunning || !document.getElementById("win-game").classList.contains("open")) return;
-      const moves = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]};
-      if (moves[event.key]) { event.preventDefault(); movePlayer(...moves[event.key]); }
+      if (!gameRunning ||
+          !document.getElementById("win-game").classList.contains("open")) return;
+
+      const moves = {
+        ArrowUp:[0,-1],
+        ArrowDown:[0,1],
+        ArrowLeft:[-1,0],
+        ArrowRight:[1,0]
+      };
+
+      if (moves[event.key]) {
+        event.preventDefault();
+        movePlayer(...moves[event.key]);
+      }
     });
+
     drawGame();
   </script>
 </body>
